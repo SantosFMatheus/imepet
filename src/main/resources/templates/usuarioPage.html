@@ -5,9 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>usuario</title>
 </head>
 <body>
-    <h1>Teste</h1>
+    <h1>Cadastro de usuários</h1>
+    <form th:action="@{/usuarios}" th:object="${usuarioModel}" method="post">
+        <label>Nome do Usuário</label>
+        <input type="text" id="nomeProduto"  th:field="*{nomeUsuario}"><br>
+        <button type="submit">Salvar</button>
+    </form>
 </body>
 </html>

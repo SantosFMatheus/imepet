@@ -10,18 +10,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
+@RequestMapping("/usuarios")
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @GetMapping("/usuarios")
+    @GetMapping
     public String getUsuarioPage(Model model){
         model.addAttribute("usuarioModel", new UsuarioModel());
         return "usuarioPage";
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<UsuarioModel>cadastraUsuario(@ModelAttribute UsuarioModel usuarioModel){
+        return ResponseEntity.ok(usuarioService.cadastrarUsuario(usuarioModel));
+    }
+
 }
