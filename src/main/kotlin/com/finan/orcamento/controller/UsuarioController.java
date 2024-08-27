@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -19,15 +21,22 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping
-    public String getUsuarioPage(Model model){
+    public String getUsuarioPage(Model model) {
         model.addAttribute("usuarioModel", new UsuarioModel());
         return "usuarioPage";
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<UsuarioModel>cadastraUsuario(@ModelAttribute UsuarioModel usuarioModel){
+    public ResponseEntity<UsuarioModel> cadastraUsuario(@ModelAttribute UsuarioModel usuarioModel) {
         return ResponseEntity.ok(usuarioService.cadastrarUsuario(usuarioModel));
     }
 
+    @GetMapping("pesquisa")
+    public String listarUsuarios(Model model) {
+        List<UsuarioModel> usuarios = usuarioService.buscarUsuario();
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuarioModel", new UsuarioModel());
+        return "usuarioPage";
+    }
 }

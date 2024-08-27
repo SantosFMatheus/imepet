@@ -5,14 +5,57 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {
+            text-align:center
+        }
+    </style>
     <title>usuario</title>
 </head>
 <body>
     <h1>Cadastro de usuários</h1>
-    <form th:action="@{/usuarios}" th:object="${usuarioModel}" method="post">
+    <form id="usuarioForm" th:action="@{/usuarios}" th:object="${usuarioModel}" method="post">
         <label>Nome do Usuário</label>
         <input type="text" id="nomeProduto"  th:field="*{nomeUsuario}"><br>
-        <button type="submit">Salvar</button>
+        <button id="salvarUsuario" type="submit">Salvar</button>
     </form>
+    <h2>Usuários Cadastrados</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome do Usuário</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.nomeUsuario}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <script>
+        document.getElementById("usuarioForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+
+        var form = event.target;
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = "/usuarios/pesquisa"; // Recarrega a página com a pesquisa
+                alert("Salvo com sucesso");
+            } else {
+                console.error("Erro ao salvar o usuário");
+            }
+        }).catch(error => {
+            console.error("Erro ao salvar o usuário", error);
+            alert("Erro ao Salvar");
+        });
+    });
+    </script>
 </body>
 </html>
