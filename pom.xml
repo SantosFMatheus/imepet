@@ -8,10 +8,10 @@
 		<version>3.2.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.finan</groupId>
-	<artifactId>orcamento</artifactId>
+	<groupId>com.imepac</groupId>
+	<artifactId>imepet</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>orcamento</name>
+	<name>imepet</name>
 	<description>CRUD junto com um PATTERN</description>
 	<properties>
 		<java.version>17</java.version>
