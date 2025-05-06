@@ -1,61 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro de Usuários</title>
     <style>
         body {
-            text-align:center
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        form, table {
+            margin: 20px auto;
+        }
+        table, th, td {
+            border: 1px solid #000;
+            border-collapse: collapse;
+            padding: 8px;
         }
     </style>
-    <title>usuario</title>
 </head>
 <body>
-    <h1>Cadastro de usuários</h1>
-    <form id="usuarioForm" th:action="@{/usuarios}" th:object="${usuarioModel}" method="post">
-        <label>Nome do Usuário</label>
-        <input type="text" id="nomeProduto"  th:field="*{nomeUsuario}"><br>
-        <button id="salvarUsuario" type="submit">Salvar</button>
-    </form>
-    <h2>Usuários Cadastrados</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome do Usuário</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="usuario : ${usuarios}">
-            <td th:text="${usuario.id}"></td>
-            <td th:text="${usuario.nomeUsuario}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <script>
-        document.getElementById("usuarioForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Impede o envio padrão do formulário
+<h1>Cadastro de Usuários</h1>
 
-        var form = event.target;
-        var formData = new FormData(form);
+<form th:action="@{/usuarios/salvar}" th:object="${usuarioModel}" method="post">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" th:field="*{nome}" required>
+    <button type="submit">Salvar</button>
+</form>
 
-        fetch(form.action, {
-            method: form.method,
-            body: formData
-        }).then(response => {
-            if (response.ok) {
-                window.location.href = "/usuarios/pesquisa";
-                alert("Salvo com sucesso");
-            } else {
-                console.error("Erro ao salvar o usuário");
-            }
-        }).catch(error => {
-            console.error("Erro ao salvar o usuário", error);
-            alert("Erro ao Salvar");
-        });
-    });
-    </script>
+<h2>Usuários Cadastrados</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+        <td th:text="${usuario.id}"></td>
+        <td th:text="${usuario.nome}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
