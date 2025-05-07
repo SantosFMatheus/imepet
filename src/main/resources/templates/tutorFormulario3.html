@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Situação de Moradia - Grupo Familiar</title>
+</head>
+<body>
+<h2>REQUERIMENTO PARA USUÁRIO DA CLÍNICA ESCOLA VETERINÁRIA</h2>
+<h3>Situação atual de Moradia *</h3>
+
+<form th:action="@{/tutores/salvar}" th:object="${tutor}" method="post">
+
+    <!-- Situação de Moradia -->
+    <input type="radio" name="situacaoMoradia" value="Mora com pai, mãe ou ambos"> Mora com pai, mãe ou ambos<br>
+    <input type="radio" name="situacaoMoradia" value="Cônjuge"> Cônjuge<br>
+    <input type="radio" name="situacaoMoradia" value="Sozinho"> Sozinho(a)<br>
+    <input type="radio" name="situacaoMoradia" value="Casa de Familiares"> Casa de Familiares<br>
+    <input type="radio" name="situacaoMoradia" value="Casa de amigos"> Casa de amigos<br>
+    <input type="radio" name="situacaoMoradia" value="Moradia mantida pela família"> Moradia mantida pela família<br>
+    <input type="radio" name="situacaoMoradia" value="Moradia Coletiva"> Moradia Coletivas, Especifique:
+    <input type="text" name="moradiaColetivaEspecificacao"><br>
+    <input type="radio" name="situacaoMoradia" value="Alugado"> Alugado, Valor R$:
+    <input type="text" name="valorAluguel"><br>
+    <input type="radio" name="situacaoMoradia" value="Outro"> Outros, Especifique:
+    <input type="text" name="moradiaOutro"><br><br>
+
+    <h3>DO GRUPO FAMILIAR DO TUTOR</h3>
+    <h4>LOCAL DE TRABALHO</h4>
+
+    <!-- Local de trabalho dos familiares -->
+    <label>Do pai *</label><br>
+    <input type="text" name="trabalhoPai"><br><br>
+
+    <label>Da mãe *</label><br>
+    <input type="text" name="trabalhoMae"><br><br>
+
+    <label>Da(o) esposa(o) *</label><br>
+    <input type="text" name="trabalhoConjuge"><br><br>
+
+    <label>Do(s) filho(s) *</label><br>
+    <input type="text" name="trabalhoFilhos"><br><br>
+
+    <button type="submit">PRÓXIMO ➝</button>
+</form>
+</body>
+</html>

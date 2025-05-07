@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Identificação dos Animais</title>
+</head>
+<body>
+<h2>IDENTIFICAÇÃO DO(S) ANIMAL(IS)</h2>
+
+<form th:action="@{/tutores/salvarAnimais}" th:object="${tutor}" method="post">
+    <!-- Animal 1 -->
+    <div>
+        <label>Animal:</label>
+        <input type="text" name="animal1_nome">
+
+        <label>Espécie: *</label>
+        <input type="text" name="animal1_especie" required><br>
+
+        <label>Raça:</label>
+        <input type="text" name="animal1_raca">
+
+        <label>Data Nascimento:</label>
+        <input type="date" name="animal1_dataNascimento">
+
+        <label>Sexo:</label>
+        <input type="text" name="animal1_sexo">
+    </div>
+    <br>
+
+    <!-- Animal 2 -->
+    <div>
+        <label>Animal:</label>
+        <input type="text" name="animal2_nome">
+
+        <label>Espécie:</label>
+        <input type="text" name="animal2_especie"><br>
+
+        <label>Raça:</label>
+        <input type="text" name="animal2_raca">
+
+        <label>Data Nascimento:</label>
+        <input type="date" name="animal2_dataNascimento">
+
+        <label>Sexo:</label>
+        <input type="text" name="animal2_sexo">
+    </div>
+    <br>
+
+    <!-- Animal 3 -->
+    <div>
+        <label>Animal:</label>
+        <input type="text" name="animal3_nome">
+
+        <label>Espécie:</label>
+        <input type="text" name="animal3_especie"><br>
+
+        <label>Raça:</label>
+        <input type="text" name="animal3_raca">
+
+        <label>Data Nascimento:</label>
+        <input type="date" name="animal3_dataNascimento">
+
+        <label>Sexo:</label>
+        <input type="text" name="animal3_sexo">
+    </div>
+    <br>
+
+    <button type="submit">PRÓXIMO ➝</button>
+</form>
+</body>
+</html>

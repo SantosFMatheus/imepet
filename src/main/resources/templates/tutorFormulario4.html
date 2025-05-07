@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dados Familiares - Renda</title>
+</head>
+<body>
+<h2>REQUERIMENTO PARA USUÁRIO DA CLÍNICA ESCOLA VETERINÁRIA</h2>
+<h3>OUTRAS FONTES DE RENDA *</h3>
+
+<form th:action="@{/tutores/salvar}" th:object="${tutor}" method="post">
+    <!-- Outras fontes de renda -->
+    <label>Outras fontes de renda *</label><br>
+    <input type="radio" name="outrasFontesRenda" value="Sim"> Sim
+    <input type="radio" name="outrasFontesRenda" value="Não"> Não<br>
+
+    <label>Do pai R$</label>
+    <input type="text" name="rendaPai"><br>
+
+    <label>Da mãe R$</label>
+    <input type="text" name="rendaMae"><br>
+
+    <label>Do(a) esposo(a) R$</label>
+    <input type="text" name="rendaConjuge"><br><br>
+
+    <!-- Total da remuneração do grupo -->
+    <label>Valor total da remuneração do grupo familiar *</label><br>
+    <input type="text" name="valorTotalRemuneracao"><br><br>
+
+    <!-- Número de pessoas no grupo -->
+    <label>Número de pessoas, incluindo você, que fazem parte do grupo familiar? *</label><br>
+    <input type="number" name="numeroPessoasGrupo"><br><br>
+
+    <!-- Programas de transferência de renda -->
+    <label>Sua família é atendida por um ou mais dos programas de transferência de renda abaixo? *</label><br>
+    <input type="radio" name="programaRenda" value="Bolsa Família"> Bolsa Família<br>
+    <input type="radio" name="programaRenda" value="BPC"> BPC - Benefício de Prestação Continuada<br>
+    <input type="radio" name="programaRenda" value="PET"> PET - Programa de Erradicação do Trabalho Infantil<br>
+    <input type="radio" name="programaRenda" value="Outros"> Outros, Especifique:
+    <input type="text" name="programaRendaOutro"><br><br>
+
+    <!-- Bens da família -->
+    <label>Informe os bens de propriedade da família (imóveis, veículos, propriedades rurais, etc) *</label><br>
+    <textarea name="bensPropriedade" rows="4" cols="50"></textarea><br><br>
+
+    <button type="submit">PRÓXIMO ➝</button>
+</form>
+</body>
+</html>

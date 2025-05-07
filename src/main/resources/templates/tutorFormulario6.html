@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Familiares</title>
+</head>
+<body>
+<h3>OBS: Preencher o quadro abaixo com as informações de TODAS as pessoas da família que residem com você. *</h3>
+
+<form th:action="@{/tutores/salvarFamiliares}" method="post">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Nome completo</th>
+            <th>Idade</th>
+            <th>Parentesco</th>
+            <th>Estado civil</th>
+            <th>Cidade onde reside</th>
+            <th>É pessoa com deficiência?</th>
+            <th>Escolaridade</th>
+            <th>Ocupação</th>
+            <th>Renda</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Linhas fixas para até 6 pessoas -->
+        <tr>
+            <td><input type="text" name="familiar1_nome"></td>
+            <td><input type="number" name="familiar1_idade"></td>
+            <td><input type="text" name="familiar1_parentesco"></td>
+            <td><input type="text" name="familiar1_estadoCivil"></td>
+            <td><input type="text" name="familiar1_cidade"></td>
+            <td><input type="text" name="familiar1_deficiencia"></td>
+            <td><input type="text" name="familiar1_escolaridade"></td>
+            <td><input type="text" name="familiar1_ocupacao"></td>
+            <td><input type="text" name="familiar1_renda"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="familiar2_nome"></td>
+            <td><input type="number" name="familiar2_idade"></td>
+            <td><input type="text" name="familiar2_parentesco"></td>
+            <td><input type="text" name="familiar2_estadoCivil"></td>
+            <td><input type="text" name="familiar2_cidade"></td>
+            <td><input type="text" name="familiar2_deficiencia"></td>
+            <td><input type="text" name="familiar2_escolaridade"></td>
+            <td><input type="text" name="familiar2_ocupacao"></td>
+            <td><input type="text" name="familiar2_renda"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="familiar3_nome"></td>
+            <td><input type="number" name="familiar3_idade"></td>
+            <td><input type="text" name="familiar3_parentesco"></td>
+            <td><input type="text" name="familiar3_estadoCivil"></td>
+            <td><input type="text" name="familiar3_cidade"></td>
+            <td><input type="text" name="familiar3_deficiencia"></td>
+            <td><input type="text" name="familiar3_escolaridade"></td>
+            <td><input type="text" name="familiar3_ocupacao"></td>
+            <td><input type="text" name="familiar3_renda"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="familiar4_nome"></td>
+            <td><input type="number" name="familiar4_idade"></td>
+            <td><input type="text" name="familiar4_parentesco"></td>
+            <td><input type="text" name="familiar4_estadoCivil"></td>
+            <td><input type="text" name="familiar4_cidade"></td>
+            <td><input type="text" name="familiar4_deficiencia"></td>
+            <td><input type="text" name="familiar4_escolaridade"></td>
+            <td><input type="text" name="familiar4_ocupacao"></td>
+            <td><input type="text" name="familiar4_renda"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="familiar5_nome"></td>
+            <td><input type="number" name="familiar5_idade"></td>
+            <td><input type="text" name="familiar5_parentesco"></td>
+            <td><input type="text" name="familiar5_estadoCivil"></td>
+            <td><input type="text" name="familiar5_cidade"></td>
+            <td><input type="text" name="familiar5_deficiencia"></td>
+            <td><input type="text" name="familiar5_escolaridade"></td>
+            <td><input type="text" name="familiar5_ocupacao"></td>
+            <td><input type="text" name="familiar5_renda"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="familiar6_nome"></td>
+            <td><input type="number" name="familiar6_idade"></td>
+            <td><input type="text" name="familiar6_parentesco"></td>
+            <td><input type="text" name="familiar6_estadoCivil"></td>
+            <td><input type="text" name="familiar6_cidade"></td>
+            <td><input type="text" name="familiar6_deficiencia"></td>
+            <td><input type="text" name="familiar6_escolaridade"></td>
+            <td><input type="text" name="familiar6_ocupacao"></td>
+            <td><input type="text" name="familiar6_renda"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <button type="submit">PRÓXIMO ➝</button>
+</form>
+</body>
+</html>

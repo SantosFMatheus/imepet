@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dados Socioeconômicos do Tutor</title>
+</head>
+<body>
+<h2>REQUERIMENTO PARA USUÁRIO DA CLÍNICA ESCOLA VETERINÁRIA</h2>
+<h3>DADOS SOCIOECONÔMICOS E FINANCEIROS DO TUTOR</h3>
+
+<form th:action="@{/tutores/salvar}" th:object="${tutor}" method="post">
+
+    <!-- Estado Civil -->
+    <label>Estado civil *</label><br>
+    <input type="radio" name="estadoCivil" value="Solteiro"> Solteiro<br>
+    <input type="radio" name="estadoCivil" value="Casado"> Casado(a)<br>
+    <input type="radio" name="estadoCivil" value="Outro"> Outro: <input type="text" name="estadoCivilOutro"><br><br>
+
+    <!-- Nome do cônjuge -->
+    <label>Nome do(a) esposo(a)</label><br>
+    <input type="text" name="nomeConjuge"><br><br>
+
+    <!-- Filhos -->
+    <label>Filhos *</label><br>
+    <input type="radio" name="temFilhos" value="Sim"> Sim
+    <input type="radio" name="temFilhos" value="Não"> Não<br><br>
+
+    <!-- Quantidade de filhos -->
+    <label>Em caso afirmativo, quantos filhos?</label><br>
+    <input type="number" name="quantidadeFilhos"><br><br>
+
+    <!-- Local de trabalho -->
+    <label>Local de Trabalho *</label><br>
+    <input type="text" name="localTrabalho"><br><br>
+
+    <!-- Valor da remuneração -->
+    <label>Valor da Remuneração Total *</label><br>
+    <input type="text" name="valorRemuneracao"><br><br>
+
+    <!-- Outras fontes de renda -->
+    <label>Outras fontes de renda *</label><br>
+    <input type="radio" name="outraRenda" value="Sim" onclick="toggleCampo(true)"> Sim
+    <input type="radio" name="outraRenda" value="Não" onclick="toggleCampo(false)"> Não
+    &nbsp; Valor R$
+    <input type="text" id="campoOutrasFontes" name="outrasFontesDeRenda" disabled>
+
+    <!-- Conta bancária -->
+    <label>Possui conta bancária *</label><br>
+    <input type="radio" name="temContaBancaria" value="Sim"> Sim
+    <input type="radio" name="temContaBancaria" value="Não"> Não<br>
+    Qual banco: <input type="text" name="banco"><br><br>
+
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">PRÓXIMO ➔</button>
+    </div>
+</form>
+</body>
+</html>
