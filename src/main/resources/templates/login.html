@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link th:href="@{/css/loginPage.css}" rel="stylesheet">
+</head>
+<body>
+<div id="background">
+    <section class="form-section">
+        <form action="#" method="POST">
+            <div class="input-group">
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+        <img th:src="@{/img/logo-imepac.png}" alt="Logo da Instituição Imepac">
+    </section>
+</div>
+</body>
+</html>
