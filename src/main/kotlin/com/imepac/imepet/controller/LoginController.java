@@ -10,7 +10,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login";
+        return "index";
     }
 
     @PostMapping("/login")
