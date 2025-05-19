@@ -1,9 +1,16 @@
 package com.imepac.imepet.model;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 
+@Entity
+@Table(name = "tutor")
 public class TutorModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String nome;
     private String celular;
     private String cpf;

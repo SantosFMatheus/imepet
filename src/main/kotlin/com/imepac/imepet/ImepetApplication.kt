@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class OrcamentoApplication
+class ImepetApplication
 
 fun main(args: Array<String>) {
-	runApplication<OrcamentoApplication>(*args)
+	runApplication<ImepetApplication>(*args)
 }

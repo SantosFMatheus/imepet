@@ -1,20 +1,7 @@
 package com.imepac.imepet.repositories;
 
 import com.imepac.imepet.model.TutorModel;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Repository
-public class TutorRepository {
-    private final List<TutorModel> tutores = new ArrayList<>();
-
-    public void salvar(TutorModel tutor) {
-        tutores.add(tutor);
-    }
-
-    public List<TutorModel> listarTodos() {
-        return tutores;
-    }
+public interface TutorRepository extends JpaRepository<TutorModel, Long> {
 }
