@@ -1,20 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial</title>
-    <link rel="stylesheet" th:href="@{/css/mainPage.css}">
+    <link rel="stylesheet" href="<c:url value='/main-page-styles.css' />">
 </head>
 <body>
-<script th:src="@{js/mainPage.js}"></script>
+<script src="<c:url value='/script.js' />"></script>
 
 <header>
     <a href="#">
-        <img th:src="@{img/logo-imepac-branca.png}" class="logo" alt="Logo Instituição Imepac">
+        <img src="<c:url value='/image.png' />" class="logo" alt="Logo Instituição Imepac">
     </a>
     <a href="#">
-        <img th:src="@{img/mainPage/user-icon.png}" alt="Ícone Usuário">
+        <img src="<c:url value='/user-icon.png' />" alt="Ícone Usuário">
     </a>
 </header>
 
@@ -25,21 +26,21 @@
 
             <div class="menu-item">
                 <a href="#" class="menu-link">
-                    <img th:src="@{img/mainPage/visao-geral-icon.png}" alt="">
+                    <img src="<c:url value='/visao-geral-icon.png' />" alt="">
                     <p>Visão Geral</p>
                 </a>
             </div>
 
             <div class="menu-item">
-                <a th:href="@{/index}" class="menu-link">
-                    <img th:src="@{/img/mainPage/cadastro-icon.png}" alt="">
+                <a href="index.jsp" class="menu-link">
+                    <img src="<c:url value='/cadastro-icon.png' />" alt="">
                     <p>Cadastrar</p>
                 </a>
             </div>
 
             <div class="menu-item">
                 <a href="#" class="menu-link">
-                    <img th:src="@{/img/mainPage/admin-icon.png}" alt="">
+                    <img src="<c:url value='/admin-icon.png' />" alt="">
                     <p>Administradores</p>
                 </a>
             </div>
@@ -59,14 +60,21 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="cadastro : ${cadastros}">
-                <td th:text="${cadastro.id}">#001</td>
-                <td th:text="${cadastro.data}">29/04</td>
-                <td th:text="${cadastro.nome}">Cadastro 001</td>
-                <td th:classappend="'status ' + ${cadastro.status.toLowerCase()}"
-                    th:text="${cadastro.status}">Aprovado</td>
-                <td th:text="${cadastro.email}">cadastroteste@gmail.com</td>
-                <td th:text="${cadastro.telefone}">(12) 34567-8910</td>
+            <tr>
+                <td>#001</td>
+                <td>29/04</td>
+                <td>Cadastro 001</td>
+                <td class="status aprovado">Aprovado</td>
+                <td>cadastroteste@gmail.com</td>
+                <td>(12) 34567-8910</td>
+            </tr>
+            <tr>
+                <td>#002</td>
+                <td>30/04</td>
+                <td>Cadastro 002</td>
+                <td class="status reprovado">Reprovado</td>
+                <td>cadastroteste2@gmail.com</td>
+                <td>(12) 38910-4567</td>
             </tr>
             </tbody>
         </table>
@@ -74,7 +82,7 @@
 </div>
 
 <a href="#" class="botao-fixo">
-    <img th:src="@{img/mainPage/plus-icon.png}" alt="Botão Fixo">
+    <img src="<c:url value='/plus-icon.png' />" alt="Botão Fixo">
 </a>
 </body>
 </html>

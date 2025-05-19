@@ -1,0 +1,207 @@
+/* CSS RESET */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/* CSS RESET */
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    background-color: #0069B3;
+}
+
+.logo{
+    width: 130px;
+    height: auto;
+    margin-left: 40px;
+}
+
+header a img{
+    width: 50px;
+    height: auto;
+    margin-right: 40px;
+}
+
+.center-div{
+    display:flex;
+}
+
+.menu-bar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: calc(100vh - 100px);
+    box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.6);
+    background-color: rgb(248, 247, 247);
+}
+
+.menu-options-container{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+}
+
+.menu-bar-title{
+    font-size: 24px;
+    margin: 20px 0 20px -50px;
+}
+
+.menu-item {
+    margin: 8px;
+    width: 220px;
+    height: 50px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.menu-item a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    height: 100%;
+    padding: 0 12px;
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+}
+
+.menu-item a img {
+    width: 28px;
+    height: 28px;
+}
+
+.menu-item a p {
+    font-size: 18px;
+    margin: 0;
+    flex: 1;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    height: 100%;
+    padding: 0 12px;
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+    transition: background-color 0.3s;
+}
+
+.menu-link.active {
+    background-color: #0067A6;
+    color: white;
+}
+
+.table-section{
+    display: flex;
+    width: calc(100% - 400px);
+    height: calc(100vh - 100px);
+    background-image: url('../img/mainPage/background-table-section.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-cadastro {
+    width: 75%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
+}
+
+.table-cadastro thead {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.table-cadastro th,
+.table-cadastro td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.table-cadastro td.status.aprovado {
+    color: green;
+    font-weight: bold;
+}
+
+.table-cadastro td.status.reprovado {
+    color: red;
+    font-weight: bold;
+}
+
+.botao-fixo {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.botao-fixo img {
+    width: 60px;
+    height: auto;
+}
