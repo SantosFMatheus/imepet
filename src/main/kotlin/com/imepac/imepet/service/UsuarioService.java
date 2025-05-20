@@ -1,33 +1,19 @@
 package com.imepac.imepet.service;
 
 import com.imepac.imepet.model.UsuarioModel;
-import com.imepac.imepet.repositories.UsuarioRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class UsuarioService {
 
-    private final UsuarioRepository usuarioRepository;
+    private final List<UsuarioModel> usuarios = List.of(
+            new UsuarioModel("admin", "1234"),
+            new UsuarioModel("user", "senha")
+    );
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
-
-    public List<UsuarioModel> listarTodos() {
-        return usuarioRepository.findAll();
-    }
-
-    public UsuarioModel salvar(UsuarioModel usuario) {
-        return usuarioRepository.save(usuario);
-    }
-
-    public UsuarioModel buscarPorId(Long id) {
-        return usuarioRepository.findById(id).orElse(null);
-    }
-
-    public void deletar(Long id) {
-        usuarioRepository.deleteById(id);
+    public boolean autenticar(String username, String password) {
+        return usuarios.stream()
+                .anyMatch(u -> u.getUsername().equals(username) && u.getPassword().equals(password));
     }
 }
