@@ -1,0 +1,28 @@
+label span,
+p span{
+    font-weight: bold;
+    color: red;
+}
+
+.divider-line{
+    margin: 160px 80px;
+    border: 1px solid black;
+}
+
+.button-next {
+    background-color: #00528B;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    margin-top: 16px;
+}
+
+.button-next:hover {
+    background-color: #003f6b;
+}
+
+
