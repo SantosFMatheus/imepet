@@ -18,6 +18,8 @@ public class TutorModel {
     private Date dataNascimento;
     private String naturalidade;
     private String estadoCivil;
+    private String temFilhos;
+
 
     // Getters e Setters
     public int getId() { return id; }
@@ -43,4 +45,7 @@ public class TutorModel {
 
     public String getEstadoCivil() { return estadoCivil; }
     public void setEstadoCivil(String estadoCivil) { this.estadoCivil = estadoCivil; }
+
+    public String getTemFilhos() { return temFilhos; }
+    public void setTemFilhos(String temFilhos) { this.temFilhos = temFilhos; }
 }
