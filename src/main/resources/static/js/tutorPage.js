@@ -3,6 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const quantidadeFilhosSelect = document.getElementById('quantidadeFilhos');
     const estadoCivilSelect = document.getElementById('estadoCivil');
     const nomeMaridoInput = document.getElementById('nomeMarido');
+    const buttonAlert = document.querySelector(".button-next"); // Correção aqui
+
+    // Verifica se o botão foi encontrado antes de adicionar o listener
+    if (buttonAlert) {
+        buttonAlert.addEventListener("click", function () {
+            alert("Tutor Cadastrado com Sucesso!");
+        });
+    }
 
     function toggleQuantidadeFilhos() {
         if (temFilhosSelect.value === 'Sim') {
@@ -22,11 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Executa ao carregar a página
     toggleQuantidadeFilhos();
     toggleNomeMarido();
 
-    // Adiciona ouvintes de mudança
     temFilhosSelect.addEventListener('change', toggleQuantidadeFilhos);
     estadoCivilSelect.addEventListener('change', toggleNomeMarido);
 });
