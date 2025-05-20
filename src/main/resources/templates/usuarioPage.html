@@ -21,22 +21,12 @@
 <div class="center-div">
     <section class="menu-bar">
         <div class="menu-options-container">
-            <p class="menu-bar-title">Menu Principal</p>
-
             <div class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="#" class="menu-link active" onclick="mostrarSecao('visao-geral-section', this)">
                     <img th:src="@{img/mainPage/visao-geral-icon.png}" alt="">
                     <p>Visão Geral</p>
                 </a>
             </div>
-
-            <div class="menu-item">
-                <a th:href="@{/index}" class="menu-link">
-                    <img th:src="@{/img/mainPage/cadastro-icon.png}" alt="">
-                    <p>Cadastrar</p>
-                </a>
-            </div>
-
             <div class="menu-item">
                 <a href="#" class="menu-link">
                     <img th:src="@{/img/mainPage/admin-icon.png}" alt="">
@@ -46,7 +36,7 @@
         </div>
     </section>
 
-    <section class="table-section">
+    <section id="visao-geral-section" class="table-section hidden">
         <table class="table-cadastro">
             <thead>
             <tr>
@@ -71,10 +61,12 @@
             </tbody>
         </table>
     </section>
+
 </div>
 
-<a href="#" class="botao-fixo">
-    <img th:src="@{img/mainPage/plus-icon.png}" alt="Botão Fixo">
+<a href="#" class="botao-fixo" onclick="abrirPopup()">
+    <img th:src="@{/img/mainPage/plus-icon.png}" alt="Botão Fixo">
 </a>
+
 </body>
 </html>
