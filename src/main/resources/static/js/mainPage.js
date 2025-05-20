@@ -14,3 +14,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+function mostrarSecao(id, link) {
+    const secoes = document.querySelectorAll('.table-section');
+    secoes.forEach(secao => secao.classList.add('hidden'));
+
+    const links = document.querySelectorAll('.menu-link');
+    links.forEach(el => el.classList.remove('active'));
+
+    const secaoAlvo = document.getElementById(id);
+    if (secaoAlvo) {
+        secaoAlvo.classList.remove('hidden');
+    }
+
+    if (link) {
+        link.classList.add('active');
+    }
+}
+
+function abrirPopup() {
+    window.open(
+        '/tutores/novo', // esta rota EXISTE no controller
+        'popupWindow',
+        'width=600,height=400,scrollbars=yes'
+    );
+}
+
+
+
+
+
+
