@@ -30,7 +30,7 @@ public class TutorController {
     @PostMapping("/salvar")
     public String salvarTutor(@ModelAttribute TutorModel tutor) {
         tutorService.salvar(tutor);
-        return "redirect:/tutores/listar";
+        return "redirect:/tutorPage";
     }
 
     @GetMapping("/listar")

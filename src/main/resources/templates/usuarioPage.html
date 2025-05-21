@@ -1,72 +1,72 @@
-<!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
-    <link rel="stylesheet" th:href="@{/css/mainPage.css}">
-</head>
-<body>
-<script th:src="@{js/mainPage.js}"></script>
+    <!DOCTYPE html>
+    <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Página Inicial</title>
+        <link rel="stylesheet" th:href="@{/css/mainPage.css}">
+    </head>
+    <body>
+    <script th:src="@{js/mainPage.js}"></script>
 
-<header>
-    <a href="#">
-        <img th:src="@{img/logo-imepac-branca.png}" class="logo" alt="Logo Instituição Imepac">
-    </a>
-    <a href="#">
-        <img th:src="@{img/mainPage/user-icon.png}" alt="Ícone Usuário">
-    </a>
-</header>
+    <header>
+        <a href="#">
+            <img th:src="@{img/logo-imepac-branca.png}" class="logo" alt="Logo Instituição Imepac">
+        </a>
+        <a href="#">
+            <img th:src="@{img/mainPage/user-icon.png}" alt="Ícone Usuário">
+        </a>
+    </header>
 
-<div class="center-div">
-    <section class="menu-bar">
-        <div class="menu-options-container">
-            <div class="menu-item">
-                <a href="#" class="menu-link active" onclick="mostrarSecao('visao-geral-section', this)">
-                    <img th:src="@{img/mainPage/visao-geral-icon.png}" alt="">
-                    <p>Visão Geral</p>
-                </a>
+    <div class="center-div">
+        <section class="menu-bar">
+            <div class="menu-options-container">
+                <div class="menu-item">
+                    <a href="#" class="menu-link active" onclick="mostrarSecao('visao-geral-section', this)">
+                        <img th:src="@{img/mainPage/visao-geral-icon.png}" alt="">
+                        <p>Visão Geral</p>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="#" class="menu-link">
+                        <img th:src="@{/img/mainPage/admin-icon.png}" alt="">
+                        <p>Administradores</p>
+                    </a>
+                </div>
             </div>
-            <div class="menu-item">
-                <a href="#" class="menu-link">
-                    <img th:src="@{/img/mainPage/admin-icon.png}" alt="">
-                    <p>Administradores</p>
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="visao-geral-section" class="table-section hidden">
-        <table class="table-cadastro">
-            <thead>
-            <tr>
-                <th>ID Cadastro</th>
-                <th>Data</th>
-                <th>Nome</th>
-                <th>Status</th>
-                <th>Email</th>
-                <th>Telefone</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="cadastro : ${cadastros}">
-                <td th:text="${cadastro.id}">#001</td>
-                <td th:text="${cadastro.data}">29/04</td>
-                <td th:text="${cadastro.nome}">Cadastro 001</td>
-                <td th:classappend="'status ' + ${cadastro.status.toLowerCase()}"
-                    th:text="${cadastro.status}">Aprovado</td>
-                <td th:text="${cadastro.email}">cadastroteste@gmail.com</td>
-                <td th:text="${cadastro.telefone}">(12) 34567-8910</td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
+        <section id="visao-geral-section" class="table-section hidden">
+            <table class="table-cadastro">
+                <thead>
+                <tr>
+                    <th>ID Cadastro</th>
+                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cadastro : ${cadastros}">
+                    <td th:text="${cadastro.id}">#001</td>
+                    <td th:text="${cadastro.data}">29/04</td>
+                    <td th:text="${cadastro.nome}">Cadastro 001</td>
+                    <td th:classappend="'status ' + ${cadastro.status.toLowerCase()}"
+                        th:text="${cadastro.status}">Aprovado</td>
+                    <td th:text="${cadastro.email}">cadastroteste@gmail.com</td>
+                    <td th:text="${cadastro.telefone}">(12) 34567-8910</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
 
-</div>
+    </div>
 
-<a href="#" class="botao-fixo" onclick="abrirPopup()">
-    <img th:src="@{/img/mainPage/plus-icon.png}" alt="Botão Fixo">
-</a>
+    <a href="#" class="botao-fixo" onclick="abrirPopup()">
+        <img th:src="@{/img/mainPage/plus-icon.png}" alt="Botão Fixo">
+    </a>
 
-</body>
-</html>
+    </body>
+    </html>
