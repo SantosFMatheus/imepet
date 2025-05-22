@@ -1,6 +1,7 @@
 package com.imepac.imepet.controller;
 
-import com.imepac.imepet.model.TutorModel;
+import com.imepac.imepet.Dto.TutorCompleto;
+import com.imepac.imepet.service.DadosSocioeconomicosService;
 import com.imepac.imepet.service.TutorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,33 +12,29 @@ import org.springframework.web.bind.annotation.*;
 public class TutorController {
 
     private final TutorService tutorService;
+    private final DadosSocioeconomicosService dadosSocioeconomicosService;
 
-    public TutorController(TutorService tutorService) {
+    public TutorController(TutorService tutorService, DadosSocioeconomicosService dadosSocioeconomicosService) {
         this.tutorService = tutorService;
-    }
-
-    @GetMapping("")
-    public String redirecionarParaLista() {
-        return "redirect:/tutores/listar";
+        this.dadosSocioeconomicosService = dadosSocioeconomicosService;
     }
 
     @GetMapping("/novo")
     public String novoTutor(Model model) {
-        model.addAttribute("tutor", new TutorModel());
+        model.addAttribute("tutorCompleto", new TutorCompleto());
         return "tutorPage";
     }
 
     @PostMapping("/salvar")
-    public String salvarTutor(@ModelAttribute TutorModel tutor) {
-        tutorService.salvar(tutor);
-        return "redirect:/tutorPage";
+    public String salvarTutor(@ModelAttribute("form") TutorCompleto form) {
+        tutorService.salvar(form.getTutor());
+        dadosSocioeconomicosService.salvar(form.getDadosSocioeconomicos());
+        return "redirect:/tutores/listar";
     }
 
     @GetMapping("/listar")
     public String listarTutores(Model model) {
         model.addAttribute("tutores", tutorService.listarTodos());
-        return "tutorPage"; // ⚠ isso só faz sentido se você mostrar os tutores lá
+        return "tutorPage";
     }
-
 }
-

@@ -1,16 +1,25 @@
 package com.imepac.imepet.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class DadosSocioeconomicosModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String situacaoMoradia;
+    private String moradiaColetivaEspecificacao;
+    private Double valorAluguel;
+    private String outrosEspecificacao;
+
     private String localTrabalho;
-    private String valorRemuneracao;
+    private Double valorRemuneracao;
 
     private String temOutrasFontesDeRenda; // "Sim" ou "Não"
     private Double valorOutrasFontesDeRenda;
@@ -21,8 +30,4 @@ public class DadosSocioeconomicosModel {
     @OneToOne
     @JoinColumn(name = "tutor_id")
     private TutorModel tutor;
-
-    // Getters e Setters
-
-    // Construtores padrão e com argumentos, se desejar
 }

@@ -1,143 +1,179 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Cadastro de Tutor</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/css/tutorPage.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Cadastro de Tutor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/tutorPage.css" rel="stylesheet">
 </head>
 <body>
 <script src="/js/tutorPage.js"></script>
-<div class="container mt-5">
-  <h2 class="mb-4">IDENTIFICAÇÃO DO TUTOR</h2>
-  <p><span>*</span> - Campos Obrigatórios</p>
-  <form th:action="@{/tutores/salvar}" th:object="${tutor}" method="post" class="row g-3">
-
-      <div class="col-md-6">
-        <label for="nome" class="form-label">Nome Completo<span> *</span></label>
-        <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
-      </div>
-
-      <div class="col-md-6">
-        <label for="celular" class="form-label">Telefone<span> *</span></label>
-        <input type="text" class="form-control" id="celular" th:field="*{celular}" required>
-      </div>
-
-      <div class="col-md-6">
-        <label for="cpf" class="form-label">CPF <span> *</span></label>
-        <input type="text" class="form-control" id="cpf" th:field="*{cpf}" required>
-      </div>
-
-      <div class="col-md-6">
-        <label for="rg" class="form-label">RG <span> *</span></label>
-        <input type="text" class="form-control" id="rg" th:field="*{rg}" required>
-      </div>
-
-      <div class="col-md-6">
-        <label for="dataNascimento" class="form-label">Data de Nascimento <span> *</span></label>
-        <input type="date" class="form-control" id="dataNascimento" th:field="*{dataNascimento}" required>
-      </div>
-
-      <div class="col-md-6">
-        <label for="naturalidade" class="form-label">Naturalidade <span> *</span></label>
-        <input type="text" class="form-control" id="naturalidade" th:field="*{naturalidade}" required>
-      </div>
-
-      <div class="col-md-6">
-        <label for="estadoCivil" class="form-label">Estado Civil <span> *</span></label>
-        <select class="form-select" id="estadoCivil"  required>
-          <option value="">Selecione</option>
-          <option value="Solteiro">Solteiro</option>
-          <option value="Casado">Casado</option>
-          <option value="Divorciado">Divorciado</option>
-          <option value="Viúvo">Viúvo</option>
-        </select>
-      </div>
-
-      <div class="col-md-6">
-        <label for="nomeMarido" class="form-label">Nome do Cônjuge</label>
-        <input type="text" class="form-control" id="nomeMarido" name="nomeMarido">
-      </div>
-
-      <div class="col-md-6">
-        <label for="temFilhos" class="form-label">Filhos <span style="color: red;">*</span></label>
-        <select class="form-select" id="temFilhos" th:field="*{temFilhos}" required>
-          <option value="">Selecione</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-      </div>
-
-      <div class="col-md-6">
-        <label for="quantidadeFilhos" class="form-label">Quantidade de Filhos</label>
-        <select class="form-select" id="quantidadeFilhos" name="quantidadeFilhos">
-          <option value="">Selecione</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5+">5 ou mais</option>
-        </select>
-      </div>
-
-      <div class="col-12 text-end">
-        <button type="submit" class="button-next">Próximo</button>
-      </div>
-  </form>
-</div>
-
-<div class="divider-line"></div>
 
 <div class="container mt-5">
-  <h2 class="mb-4">DADOS SOCIOECONÔMICOS</h2>
-  <p><span>*</span> - Campos Obrigatórios</p>
-  <form th:action="@{/tutores/salvar}" th:object="${tutor}" method="post" class="row g-3">
+    <form th:action="@{/tutores/salvar}" th:object="${tutorCompleto}" method="post" class="row g-3">
+        <!-- IDENTIFICAÇÃO DO TUTOR -->
+        <h2 class="mb-4">IDENTIFICAÇÃO DO TUTOR</h2>
+        <p><span>*</span> - Campos Obrigatórios</p>
 
-    <div class="col-md-6">
-      <label for="localTrabalho" class="form-label">Local de Trabalho<span> *</span></label>
-      <input type="text" class="form-control" id="localTrabalho" th:field="*{nome}" required>
-    </div>
+        <div class="col-md-6">
+            <label for="nome">Nome Completo<span> *</span></label>
+            <input type="text" class="form-control" id="nome" th:field="*{tutor.nome}" required>
+        </div>
 
-    <div class="col-md-6">
-      <label for="valorRemuneracao" class="form-label">Valor da Remuneração Total<span> *</span></label>
-      <input type="text" class="form-control" id="valorRemuneracao" th:field="*{celular}" required>
-    </div>
+        <div class="col-md-6">
+            <label for="celular">Telefone<span> *</span></label>
+            <input type="text" class="form-control" id="celular" th:field="*{tutor.celular}" required>
+        </div>
 
-    <div class="col-md-6">
-      <label for="temOutrasFontesDeRenda" class="form-label">Outras Fontes de Renda <span style="color: red;">*</span></label>
-      <select class="form-select" id="temOutrasFontesDeRenda" th:field="*{temFilhos}" required>
-        <option value="">Selecione</option>
-        <option value="Sim">Sim</option>
-        <option value="Não">Não</option>
-      </select>
-    </div>
+        <div class="col-md-6">
+            <label for="cpf">CPF <span> *</span></label>
+            <input type="text" class="form-control" id="cpf" th:field="*{tutor.cpf}" required>
+        </div>
 
-    <div class="col-md-6">
-      <label for="valorOutrasFontesDeRenda" class="form-label">Valor</label>
-      <input type="number" class="form-control" id="valorOutrasFontesDeRenda" name="outras-fontes">
-    </div>
+        <div class="col-md-6">
+            <label for="rg">RG <span> *</span></label>
+            <input type="text" class="form-control" id="rg" th:field="*{tutor.rg}" required>
+        </div>
 
-    <div class="col-md-6">
-      <label for="temContaBancaria" class="form-label">Conta Bancária <span style="color: red;">*</span></label>
-      <select class="form-select" id="temContaBancaria" th:field="*{temFilhos}" required>
-        <option value="">Selecione</option>
-        <option value="Sim">Sim</option>
-        <option value="Não">Não</option>
-      </select>
-    </div>
+        <div class="col-md-6">
+            <label for="dataNascimento">Data de Nascimento <span> *</span></label>
+            <input type="date" class="form-control" id="dataNascimento" th:field="*{tutor.dataNascimento}" required>
+        </div>
 
-    <div class="col-md-6">
-      <label for="nomeBanco" class="form-label">Nome do Banco</label>
-      <input type="number" class="form-control" id="nomeBanco" name="nome-banco">
-    </div>
+        <div class="col-md-6">
+            <label for="naturalidade">Naturalidade <span> *</span></label>
+            <input type="text" class="form-control" id="naturalidade" th:field="*{tutor.naturalidade}" required>
+        </div>
 
+        <div class="col-md-6">
+            <label for="estadoCivil">Estado Civil <span> *</span></label>
+            <select class="form-select" id="estadoCivil" th:field="*{tutor.estadoCivil}" required>
+                <option value="">Selecione</option>
+                <option value="Solteiro">Solteiro</option>
+                <option value="Casado">Casado</option>
+                <option value="Divorciado">Divorciado</option>
+                <option value="Viúvo">Viúvo</option>
+            </select>
+        </div>
 
+        <div class="col-md-6">
+            <label for="nomeConjuge">Nome do Cônjuge</label>
+            <input type="text" class="form-control" id="nomeConjuge" th:field="*{tutor.nomeMarido}">
+        </div>
 
+        <div class="col-md-6">
+            <label for="temFilhos">Filhos <span> *</span></label>
+            <select class="form-select" id="temFilhos" th:field="*{tutor.temFilhos}" required>
+                <option value="">Selecione</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
+        </div>
 
-    <div class="col-12 text-end">
-      <button type="submit" class="button-next">Próximo</button>
-    </div>
-  </form>
+        <div class="col-md-6">
+            <label for="quantidadeFilhos">Quantidade de Filhos</label>
+            <select class="form-select" id="quantidadeFilhos" th:field="*{tutor.quantidadeFilhos}">
+                <option value="">Selecione</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5+">5 ou mais</option>
+            </select>
+        </div>
+
+        <div class="divider-line my-4"></div>
+
+        <!-- DADOS SOCIOECONÔMICOS -->
+        <h2 class="mb-4">DADOS SOCIOECONÔMICOS</h2>
+        <p><span>*</span> - Campos Obrigatórios</p>
+
+        <div class="col-md-12">
+            <label class="form-label">Situação Atual de Moradia <span>*</span></label>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{dadosSocioeconomicos.situacaoMoradia}" value="Mora com pai, mãe ou ambos">
+                <label class="form-check-label">Mora com pai, mãe ou ambos</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{dadosSocioeconomicos.situacaoMoradia}" value="Cônjuge">
+                <label class="form-check-label">Cônjuge</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{dadosSocioeconomicos.situacaoMoradia}" value="Sozinho">
+                <label class="form-check-label">Sozinho(a)</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{dadosSocioeconomicos.situacaoMoradia}" value="Casa de Familiares">
+                <label class="form-check-label">Casa de Familiares</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{dadosSocioeconomicos.situacaoMoradia}" value="Casa de amigos">
+                <label class="form-check-label">Casa de amigos</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{dadosSocioeconomicos.situacaoMoradia}" value="Moradia mantida pela família">
+                <label class="form-check-label">Moradia mantida pela família</label>
+            </div>
+            <div class="form-check d-flex">
+                <input class="form-check-input" type="radio" th:field="*{dadosSocioeconomicos.situacaoMoradia}" value="Moradia coletiva">
+                <label class="form-check-label me-2">Moradia Coletiva, Especifique:</label>
+                <input type="text" class="form-control" th:field="*{dadosSocioeconomicos.moradiaColetivaEspecificacao}" style="width: 300px;">
+            </div>
+            <div class="form-check d-flex">
+                <input class="form-check-input" type="radio" th:field="*{dadosSocioeconomicos.situacaoMoradia}" value="Alugado">
+                <label class="form-check-label me-2">Alugado, Valor R$</label>
+                <input type="number" step="0.01" class="form-control" th:field="*{dadosSocioeconomicos.valorAluguel}" style="width: 150px;">
+            </div>
+            <div class="form-check d-flex">
+                <input class="form-check-input" type="radio" th:field="*{dadosSocioeconomicos.situacaoMoradia}" value="Outros">
+                <label class="form-check-label me-2">Outros, Especifique:</label>
+                <input type="text" class="form-control" th:field="*{dadosSocioeconomicos.outrosEspecificacao}" style="width: 300px;">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label>Local de Trabalho<span> *</span></label>
+            <input type="text" class="form-control" th:field="*{dadosSocioeconomicos.localTrabalho}" required>
+        </div>
+
+        <div class="col-md-6">
+            <label>Valor da Remuneração Total<span> *</span></label>
+            <input type="number" step="0.01" class="form-control" th:field="*{dadosSocioeconomicos.valorRemuneracao}" required>
+        </div>
+
+        <div class="col-md-6">
+            <label>Outras Fontes de Renda<span> *</span></label>
+            <select class="form-select" th:field="*{dadosSocioeconomicos.temOutrasFontesDeRenda}" required>
+                <option value="">Selecione</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label>Valor Outras Fontes</label>
+            <input type="number" step="0.01" class="form-control" th:field="*{dadosSocioeconomicos.valorOutrasFontesDeRenda}">
+        </div>
+
+        <div class="col-md-6">
+            <label>Possui Conta Bancária?<span> *</span></label>
+            <select class="form-select" th:field="*{dadosSocioeconomicos.temContaBancaria}" required>
+                <option value="">Selecione</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label>Qual Banco?</label>
+            <input type="text" class="form-control" th:field="*{dadosSocioeconomicos.nomeBanco}">
+        </div>
+
+        <div class="col-12 text-end mt-3">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>
