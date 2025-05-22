@@ -1,72 +1,107 @@
-    <!DOCTYPE html>
-    <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Página Inicial</title>
-        <link rel="stylesheet" th:href="@{/css/mainPage.css}">
-    </head>
-    <body>
-    <script th:src="@{js/mainPage.js}"></script>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" th:href="@{/css/mainPage.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+</head>
+<body>
+<script th:src="@{js/mainPage.js}"></script>
 
-    <header>
-        <a href="#">
-            <img th:src="@{img/logo-imepac-branca.png}" class="logo" alt="Logo Instituição Imepac">
-        </a>
+<header>
+    <a href="#">
+        <img th:src="@{img/logo-imepac-branca.png}" class="logo" alt="Logo Instituição Imepac">
+    </a>
+    <div class="user-div">
+        <p>Placeholder</p>
         <a href="#">
             <img th:src="@{img/mainPage/user-icon.png}" alt="Ícone Usuário">
         </a>
-    </header>
-
-    <div class="center-div">
-        <section class="menu-bar">
-            <div class="menu-options-container">
-                <div class="menu-item">
-                    <a href="#" class="menu-link active" onclick="mostrarSecao('visao-geral-section', this)">
-                        <img th:src="@{img/mainPage/visao-geral-icon.png}" alt="">
-                        <p>Visão Geral</p>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a href="#" class="menu-link">
-                        <img th:src="@{/img/mainPage/admin-icon.png}" alt="">
-                        <p>Administradores</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="visao-geral-section" class="table-section hidden">
-            <table class="table-cadastro">
-                <thead>
-                <tr>
-                    <th>ID Cadastro</th>
-                    <th>Data</th>
-                    <th>Nome</th>
-                    <th>Status</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="cadastro : ${cadastros}">
-                    <td th:text="${cadastro.id}">#001</td>
-                    <td th:text="${cadastro.data}">29/04</td>
-                    <td th:text="${cadastro.nome}">Cadastro 001</td>
-                    <td th:classappend="'status ' + ${cadastro.status.toLowerCase()}"
-                        th:text="${cadastro.status}">Aprovado</td>
-                    <td th:text="${cadastro.email}">cadastroteste@gmail.com</td>
-                    <td th:text="${cadastro.telefone}">(12) 34567-8910</td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
-
     </div>
+</header>
 
-    <a href="#" class="botao-fixo" onclick="abrirPopup()">
-        <img th:src="@{/img/mainPage/plus-icon.png}" alt="Botão Fixo">
-    </a>
+<div class="center-div">
+    <section class="menu-bar">
+        <div class="menu-options-container">
+            <div class="menu-item">
+                <a href="#" class="menu-link active" onclick="mostrarSecao('visao-geral-section', this)">
+                    <img th:src="@{img/mainPage/visao-geral-icon.png}" alt="">
+                    <p>Visão Geral</p>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="#" class="menu-link" onclick="mostrarSecao('administradores-section', this)">
+                    <img th:src="@{/img/mainPage/admin-icon.png}" alt="">
+                    <p>Administradores</p>
+                </a>
+            </div>
+        </div>
+        <a href="#" class="quitBtn">
+            <img id="quitBtn" th:src="@{/img/mainPage/quit.png}" alt="Sair">
+        </a>
+    </section>
 
-    </body>
-    </html>
+    <section id="initial-section" class="initial-section">
+    </section>
+
+    <section id="visao-geral-section" class="table-section hidden">
+        <table class="table-cadastro">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data de Nascimento</th>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>CPF</th>
+                <th>RG</th>
+                <th>Celular</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tutor : ${tutores}">
+                <td th:text="${tutor.id}">1</td>
+                <td th:text="${#dates.format(tutor.dataNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
+                <td th:text="${tutor.nome}">João</td>
+                <td th:text="${tutor.estadoCivil}">Solteiro</td>
+                <td th:text="${tutor.cpf}">000.000.000-00</td>
+                <td th:text="${tutor.rg}">MG-12.345.678</td>
+                <td th:text="${tutor.celular}">(00) 91234-5678</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </section>
+    <section id="administradores-section" class="table-section hidden">
+        <table class="table-cadastro">
+            <thead>
+            <tr>
+                <th>ID Admin</th>
+                <th>Data Cadastro</th>
+                <th>Nome</th>
+                <th>Usuário</th>
+                <th>Email do responsável</th>
+                <th>Telefone</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="admin : ${admins}">
+                <td th:text="'#' + ${admin.id}">#001</td>
+                <td th:text="${admin.dataCadastro}">29/04</td>
+                <td th:text="${admin.nome}">Cadastro 001</td>
+                <td th:text="${admin.usuario}">Matheus felipe</td>
+                <td th:text="${admin.emailResponsavel}">cadastroteste@gmail.com</td>
+                <td th:text="${admin.telefone}">(12) 34567-8910</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<a href="#" class="botao-fixo" onclick="abrirPopup()">
+    <img th:src="@{/img/mainPage/plus-icon.png}" alt="Botão Fixo">
+</a>
+
+</body>
+</html>
