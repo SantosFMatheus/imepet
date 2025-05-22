@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 @Getter
 @Setter
@@ -26,6 +27,19 @@ public class TutorModel {
 
     private String temFilhos; // "Sim" ou "Não"
     private String quantidadeFilhos;
+
+    private String cep;
+    private String municipio;
+    private String uf;
+    private String rua;
+    private String numero;
+    private String bairro;
+    private String telefone;
+
+    private String tipoResidencia; // Urbana ou Rural
+    private String situacaoImovel; // Próprio, Financiado, Cedido, Alugado
+    private BigDecimal valorAluguel;
+
 
     @OneToOne(mappedBy = "tutor", cascade = CascadeType.ALL)
     private DadosSocioeconomicosModel dadosSocioeconomicos;
