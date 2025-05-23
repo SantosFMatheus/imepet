@@ -35,6 +35,13 @@ public class TutorController {
     @GetMapping("/listar")
     public String listarTutores(Model model) {
         model.addAttribute("tutores", tutorService.listarTodos());
-        return "tutorPage";
+        return "usuarioPage";
     }
+
+    @GetMapping("/resumo")
+    public String listarResumoTutores(Model model) {
+        model.addAttribute("tutores", tutorService.listarCamposResumidos());
+        return "resumoTutoresPage"; // Esse é o nome do seu HTML para a tabela resumida
+    }
+
 }

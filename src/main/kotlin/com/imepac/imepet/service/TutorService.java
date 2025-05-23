@@ -5,8 +5,11 @@ import com.imepac.imepet.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
 
 @Service
 public class TutorService {
@@ -32,6 +35,20 @@ public class TutorService {
 
     public void deletarPorId(Long id) {
         tutorRepository.deleteById(id);
+    }
+
+    public List<Map<String, Object>> listarCamposResumidos() {
+        return tutorRepository.findAll().stream().map(tutor -> {
+            Map<String, Object> dados = new HashMap<>();
+            dados.put("id", tutor.getId());
+            dados.put("nome", tutor.getNome());
+            dados.put("dataNascimento", tutor.getDataNascimento());
+            dados.put("status", tutor.getEstadoCivil()); // ou outro campo, se preferir
+            dados.put("cpf", tutor.getCpf());
+            dados.put("rg", tutor.getRg());
+            dados.put("celular", tutor.getCelular());
+            return dados;
+        }).toList();
     }
 
     public boolean existePorId(Long id) {
