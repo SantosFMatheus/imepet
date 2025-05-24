@@ -73,6 +73,6 @@ function abrirPopup() {
     window.open(
         url,
         'popupWindow',
-        'width=600,height=400,scrollbars=yes'
+        'width=600,height=1200,scrollbars=yes'
     );
 }
