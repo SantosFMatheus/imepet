@@ -108,11 +108,10 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleOutroInput();
     }
 
-    // Validação geral
-    if (buttonAlert) {
-        buttonAlert.addEventListener('click', function (e) {
-            const form = document.querySelector('form');
-            if (!form) return;
+ // Validação + Envio com fetch
+    if (form && buttonAlert) {
+        buttonAlert.addEventListener('click', async function (e) {
+            e.preventDefault();
 
             const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
             let allFilled = true;
@@ -126,12 +125,74 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            if (allFilled) {
-                alert('Tutor Cadastrado com Sucesso!');
-                window.close();  // tenta fechar a aba/janela atual
-            } else {
-                e.preventDefault();
+            if (!allFilled) {
+                alert('Preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            const formData = new FormData(form);
+            const jsonData = {};
+            for (const [key, value] of formData.entries()) {
+                jsonData[key] = value;
+            }
+
+            try {
+                const response = await fetch('/tutores/salvar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(jsonData)
+                });
+
+                if (response.ok) {
+                    const novoTutor = await response.json();
+
+                    if (window.opener && !window.opener.closed) {
+                        window.opener.carregarTutoresResumidos();
+                    }
+
+                    alert('Tutor cadastrado com sucesso!');
+                    form.reset(); // limpa o formulário
+                } else {
+                    alert("Erro ao salvar tutor.");
+                }
+            } catch (error) {
+                console.error('Erro ao enviar o formulário:', error);
             }
         });
     }
 });
+
+// Essas funções não precisam estar dentro do DOMContentLoaded
+function carregarTutoresResumidos() {
+    fetch('/tutores/resumidos')
+        .then(response => response.json())
+        .then(tutores => {
+            const tbody = document.getElementById('tabela-tutores-body');
+            tbody.innerHTML = '';
+
+            tutores.forEach(tutor => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${tutor.id}</td>
+                    <td>${formatarData(tutor.dataNascimento)}</td>
+                    <td>${tutor.nome}</td>
+                    <td>${tutor.status}</td>
+                    <td>${tutor.cpf}</td>
+                    <td>${tutor.rg}</td>
+                    <td>${tutor.celular}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao carregar tutores:', error);
+        });
+}
+
+function formatarData(dataISO) {
+    const data = new Date(dataISO);
+    return data.toLocaleDateString('pt-BR');
+}
+
