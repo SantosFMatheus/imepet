@@ -59,12 +59,12 @@
                 <th>Celular</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="tabela-tutores-body">
             <tr th:each="tutor : ${tutores}">
                 <td th:text="${tutor.id}">1</td>
                 <td th:text="${#dates.format(tutor.dataNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
                 <td th:text="${tutor.nome}">João</td>
-                <td th:text="${tutor.estadoCivil}">Solteiro</td>
+                <td th:text="${tutor.status}">Solteiro</td>
                 <td th:text="${tutor.cpf}">000.000.000-00</td>
                 <td th:text="${tutor.rg}">MG-12.345.678</td>
                 <td th:text="${tutor.celular}">(00) 91234-5678</td>

@@ -75,4 +75,42 @@ function abrirPopup() {
         'popupWindow',
         'width=600,height=400,scrollbars=yes'
     );
+
 }
+
+function carregarTutoresResumidos() {
+    fetch('/tutores/resumidos')
+        .then(response => response.json())
+        .then(tutores => {
+            const tbody = document.getElementById('tabela-tutores-body');
+            tbody.innerHTML = ''; // limpa a tabela
+
+            tutores.forEach(tutor => {
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                    <td>${tutor.id}</td>
+                    <td>${formatarData(tutor.dataNascimento)}</td>
+                    <td>${tutor.nome}</td>
+                    <td>${tutor.status}</td>
+                    <td>${tutor.cpf}</td>
+                    <td>${tutor.rg}</td>
+                    <td>${tutor.celular}</td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao carregar tutores:', error);
+        });
+}
+
+function formatarData(dataISO) {
+    const data = new Date(dataISO);
+    return data.toLocaleDateString('pt-BR'); // converte para dd/mm/yyyy
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    carregarTutoresResumidos();
+});
