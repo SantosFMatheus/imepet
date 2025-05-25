@@ -11,14 +11,12 @@
 <script th:src="@{js/mainPage.js}"></script>
 
 <header>
-    <a href="#">
+    <a href="https://imepac.edu.br" target="_blank">
         <img th:src="@{img/logo-imepac-branca.png}" class="logo" alt="Logo Instituição Imepac">
     </a>
     <div class="user-div">
         <p>Placeholder</p>
-        <a href="#">
-            <img th:src="@{img/mainPage/user-icon.png}" alt="Ícone Usuário">
-        </a>
+        <img th:src="@{img/mainPage/user-icon.png}" alt="Ícone Usuário">
     </div>
 </header>
 
@@ -27,18 +25,18 @@
         <div class="menu-options-container">
             <div class="menu-item">
                 <a href="#" class="menu-link active" onclick="mostrarSecao('visao-geral-section', this)">
-                    <img th:src="@{img/mainPage/visao-geral-icon.png}" alt="">
+                    <img th:src="@{img/mainPage/visao-geral-icon.png}" alt="Icone da sessão visão geral">
                     <p>Visão Geral</p>
                 </a>
             </div>
             <div class="menu-item">
                 <a href="#" class="menu-link" onclick="mostrarSecao('administradores-section', this)">
-                    <img th:src="@{/img/mainPage/admin-icon.png}" alt="">
+                    <img th:src="@{/img/mainPage/admin-icon.png}" alt="Icone da sessão de administradores">
                     <p>Administradores</p>
                 </a>
             </div>
         </div>
-        <a href="#" class="quitBtn">
+        <a th:href="@{/login}" class="quitBtn">
             <img id="quitBtn" th:src="@{/img/mainPage/quit.png}" alt="Sair">
         </a>
     </section>
@@ -47,6 +45,18 @@
     </section>
 
     <section id="visao-geral-section" class="table-section hidden">
+
+        <div class="filter-section-container">
+            <div class="filter-div">
+                <input placeholder="Digite o nome do tutor">
+                <button>Filtrar</button>
+            </div>
+            <div class="button-filter-container">
+                <button id="button-aprovado">APROVADOS</button>
+                <button id="button-reprovado">REPROVADOS</button>
+            </div>
+        </div>
+
         <table class="table-cadastro">
             <thead>
             <tr>
@@ -71,9 +81,15 @@
             </tr>
             </tbody>
         </table>
-
     </section>
+
     <section id="administradores-section" class="table-section hidden">
+
+        <div class="filter-div">
+            <input placeholder="Digite o nome do administrador">
+            <button>Filtrar</button>
+        </div>
+
         <table class="table-cadastro">
             <thead>
             <tr>
@@ -99,8 +115,12 @@
     </section>
 </div>
 
+
+<a href="#" class="botao-fixo botao-atualizar" onclick="abrirPopup()">
+    <img th:src="@{/img/mainPage/atualizar-icon.png}" alt="Botão atualizar cadastro">
+</a>
 <a href="#" class="botao-fixo" onclick="abrirPopup()">
-    <img th:src="@{/img/mainPage/plus-icon.png}" alt="Botão Fixo">
+    <img th:src="@{/img/mainPage/plus-icon.png}" alt="Botão fazer novo cadastro">
 </a>
 
 </body>

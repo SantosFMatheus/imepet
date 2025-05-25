@@ -80,7 +80,7 @@ header{
     margin-left: 95px;
 }
 
-header a img{
+header img{
     width: 50px;
     height: auto;
 }
@@ -184,6 +184,7 @@ header a img{
 
 .table-section{
     display: flex;
+    flex-direction: column;
     width: calc(100% - 400px);
     height: calc(100vh - 100px);
     background-image: url('../img/mainPage/background-table-section.png');
@@ -200,12 +201,87 @@ header a img{
     background-image: url('../img/mainPage/background-table-section.png');
     background-size: cover;
     background-repeat: no-repeat;
-    align-items: center;
+    align-items: normal;
     justify-content: center;
 }
 
+.filter-section-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 625px;
+    margin-bottom: 20px;
+}
+
+.filter-div {
+    gap: 20px;
+    display: flex;
+}
+
+.filter-div input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.filter-div button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.filter-div button:hover {
+    background-color: #003f6b;
+}
+
+.button-filter-container {
+    display: flex;
+    gap: 20px;
+}
+
+.button-filter-container button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.button-filter-container button:hover {
+    background-color: #0056b3;
+}
+
+#button-aprovado{
+    background-color: #008675;
+}
+
+#button-aprovado:hover{
+    background-color: #006558;
+}
+
+#button-reprovado{
+    background-color: #860002;
+}
+
+#button-reprovado:hover{
+    background-color: #630103;
+}
+
+
 
 .table-cadastro {
+    margin-top: 20px;
     width: 75%;
     border-collapse: collapse;
     background: white;
@@ -237,6 +313,11 @@ header a img{
     font-weight: bold;
 }
 
+tr.highlighted {
+    background-color: #d0e7ff;
+    cursor: pointer;
+}
+
 .botao-fixo {
     position: fixed;
     bottom: 30px;
@@ -257,3 +338,74 @@ header a img{
     width: 90px;
     height: auto;
 }
+
+.botao-atualizar{
+    right: 210px;
+}
+
+/* RESPONSIVIDADE: Seções e filtros */
+
+@media (max-width: 1024px) {
+    .initial-section,
+    .table-section,
+    .administradores-section {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .filter-section-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        max-width: 100%;
+    }
+
+    .filter-div {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .filter-div input {
+        width: 100%;
+    }
+
+    .button-filter-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .initial-section,
+    .table-section,
+    .administradores-section {
+        width: 100%;
+        height: auto;
+        padding: 15px 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .filter-section-container {
+        padding: 0 10px;
+    }
+
+    .filter-div input {
+        font-size: 16px;
+    }
+
+    .button-filter-container button,
+    .filter-div button {
+        font-size: 16px;
+        padding: 10px 14px;
+    }
+}
+
+
