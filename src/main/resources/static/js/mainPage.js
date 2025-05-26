@@ -42,6 +42,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Carregar tutores resumidos via fetch
     carregarTutoresResumidos();
+
+        const botaoAprovado = document.getElementById("button-aprovado");
+        if (botaoAprovado) {
+            botaoAprovado.addEventListener("click", () => {
+                carregarTutoresResumidos('', 'APROVADO');
+            });
+        }
+
+        const botaoReprovado = document.getElementById("button-reprovado");
+        if (botaoReprovado) {
+            botaoReprovado.addEventListener("click", () => {
+                carregarTutoresResumidos('', 'REPROVADO');
+            });
+        }
+
 });
 
 // Função para mostrar seção conforme menu clicado
@@ -90,8 +105,16 @@ function abrirPopup() {
     );
 }
 
-function carregarTutoresResumidos(nome = '') {
-    const url = nome ? `/tutores/resumidos?nome=${encodeURIComponent(nome)}` : '/tutores/resumidos';
+function carregarTutoresResumidos(nome = '', status = '') {
+    let url = '/tutores/resumidos';
+    const params = [];
+
+    if (nome) params.push(`nome=${encodeURIComponent(nome)}`);
+    if (status) params.push(`status=${encodeURIComponent(status)}`);
+
+    if (params.length > 0) {
+        url += '?' + params.join('&');
+    }
 
     fetch(url)
         .then(response => response.json())
@@ -117,6 +140,7 @@ function carregarTutoresResumidos(nome = '') {
             console.error('Erro ao carregar tutores:', error);
         });
 }
+
 
 function formatarData(dataISO) {
     const data = new Date(dataISO);

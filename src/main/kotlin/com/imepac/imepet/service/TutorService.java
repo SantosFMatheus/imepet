@@ -1,5 +1,6 @@
 package com.imepac.imepet.service;
 
+import com.imepac.imepet.model.DadosSocioeconomicosModel;
 import com.imepac.imepet.model.TutorModel;
 import com.imepac.imepet.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,5 +77,75 @@ public class TutorService {
         return tutorRepository.existsById(id);
     }
 
+    public void atualizarTutorExistente(TutorModel tutorAtualizado) {
+        TutorModel tutorExistente = tutorRepository.findById(tutorAtualizado.getId())
+                .orElseThrow(() -> new RuntimeException("Tutor não encontrado"));
+
+        // Atualização dos campos de TutorModel
+        tutorExistente.setNome(tutorAtualizado.getNome());
+        tutorExistente.setCelular(tutorAtualizado.getCelular());
+        tutorExistente.setCpf(tutorAtualizado.getCpf());
+        tutorExistente.setRg(tutorAtualizado.getRg());
+        tutorExistente.setDataNascimento(tutorAtualizado.getDataNascimento());
+        tutorExistente.setNaturalidade(tutorAtualizado.getNaturalidade());
+        tutorExistente.setEstadoCivil(tutorAtualizado.getEstadoCivil());
+        tutorExistente.setNomeMarido(tutorAtualizado.getNomeMarido());
+        tutorExistente.setTemFilhos(tutorAtualizado.getTemFilhos());
+        tutorExistente.setQuantidadeFilhos(tutorAtualizado.getQuantidadeFilhos());
+        tutorExistente.setCep(tutorAtualizado.getCep());
+        tutorExistente.setMunicipio(tutorAtualizado.getMunicipio());
+        tutorExistente.setUf(tutorAtualizado.getUf());
+        tutorExistente.setRua(tutorAtualizado.getRua());
+        tutorExistente.setNumero(tutorAtualizado.getNumero());
+        tutorExistente.setBairro(tutorAtualizado.getBairro());
+        tutorExistente.setTelefone(tutorAtualizado.getTelefone());
+        tutorExistente.setTipoResidencia(tutorAtualizado.getTipoResidencia());
+        tutorExistente.setSituacaoImovel(tutorAtualizado.getSituacaoImovel());
+        tutorExistente.setValorAluguel(tutorAtualizado.getValorAluguel());
+        // Não alteramos o status para manter o fluxo ("Em análise" ou conforme lógica futura)
+
+        // Atualização dos dados socioeconômicos
+        DadosSocioeconomicosModel dadosAtualizados = tutorAtualizado.getDadosSocioeconomicos();
+        DadosSocioeconomicosModel dadosExistentes = tutorExistente.getDadosSocioeconomicos();
+
+        if (dadosAtualizados != null && dadosExistentes != null) {
+            dadosExistentes.setSituacaoMoradia(dadosAtualizados.getSituacaoMoradia());
+            dadosExistentes.setMoradiaColetivaEspecificacao(dadosAtualizados.getMoradiaColetivaEspecificacao());
+            dadosExistentes.setValorAluguel(dadosAtualizados.getValorAluguel());
+            dadosExistentes.setOutrosEspecificacao(dadosAtualizados.getOutrosEspecificacao());
+
+            dadosExistentes.setLocalTrabalho(dadosAtualizados.getLocalTrabalho());
+            dadosExistentes.setValorRemuneracao(dadosAtualizados.getValorRemuneracao());
+            dadosExistentes.setTemOutrasFontesDeRenda(dadosAtualizados.getTemOutrasFontesDeRenda());
+            dadosExistentes.setValorOutrasFontesDeRenda(dadosAtualizados.getValorOutrasFontesDeRenda());
+
+            dadosExistentes.setTemContaBancaria(dadosAtualizados.getTemContaBancaria());
+            dadosExistentes.setNomeBanco(dadosAtualizados.getNomeBanco());
+
+            dadosExistentes.setLocalTrabalhoPai(dadosAtualizados.getLocalTrabalhoPai());
+            dadosExistentes.setLocalTrabalhoMae(dadosAtualizados.getLocalTrabalhoMae());
+            dadosExistentes.setLocalTrabalhoConjuge(dadosAtualizados.getLocalTrabalhoConjuge());
+            dadosExistentes.setLocalTrabalhoFilhos(dadosAtualizados.getLocalTrabalhoFilhos());
+
+            dadosExistentes.setRendaPai(dadosAtualizados.getRendaPai());
+            dadosExistentes.setRendaMae(dadosAtualizados.getRendaMae());
+            dadosExistentes.setRendaConjuge(dadosAtualizados.getRendaConjuge());
+            dadosExistentes.setValorTotalRemuneracao(dadosAtualizados.getValorTotalRemuneracao());
+
+            dadosExistentes.setNumeroPessoasGrupoFamiliar(dadosAtualizados.getNumeroPessoasGrupoFamiliar());
+            dadosExistentes.setProgramaSocial(dadosAtualizados.getProgramaSocial());
+            dadosExistentes.setOutroProgramaSocial(dadosAtualizados.getOutroProgramaSocial());
+            dadosExistentes.setBensFamiliares(dadosAtualizados.getBensFamiliares());
+        }
+
+        tutorRepository.save(tutorExistente);
+    }
+    public void atualizarStatus(Long id, String novoStatus) {
+        TutorModel tutor = tutorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Tutor não encontrado"));
+
+        tutor.setStatus(novoStatus);
+        tutorRepository.save(tutor);
+    }
 
 }

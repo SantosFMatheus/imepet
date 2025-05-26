@@ -1,8 +1,12 @@
 package com.imepac.imepet.controller;
 
+import com.imepac.imepet.Dto.AtualizarStatusDTO;
 import com.imepac.imepet.Dto.TutorCompleto;
+import com.imepac.imepet.model.DadosSocioeconomicosModel;
 import com.imepac.imepet.service.DadosSocioeconomicosService;
 import com.imepac.imepet.service.TutorService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,9 +39,17 @@ public class TutorController {
 
     @PostMapping("/salvar")
     public String salvarTutor(@ModelAttribute("form") TutorCompleto form, Model model) {
-        tutorService.salvar(form.getTutor());
-        dadosSocioeconomicosService.salvar(form.getDadosSocioeconomicos());
-        return "popup-success"; // ← uma nova página só com JS para fechar o popup
+        TutorModel tutor = form.getTutor();
+        DadosSocioeconomicosModel dados = form.getDadosSocioeconomicos();
+
+        // Conecta os dois lados da relação
+        dados.setTutor(tutor);
+        tutor.setDadosSocioeconomicos(dados);
+
+        // Salva apenas o tutor — o JPA cuida do resto via cascade
+        tutorService.salvar(tutor);
+
+        return "popup-success"; // Página para fechar o popup via JS
     }
 
     @GetMapping("/listar")
@@ -61,12 +73,40 @@ public class TutorController {
                 .map(DadosTutorResumidoDTO::new)
                 .collect(Collectors.toList());
     }
+
     @GetMapping("/editar/{id}")
     public String editarTutor(@PathVariable Long id, Model model) {
         TutorModel tutor = tutorService.buscarPorId(id)
-                .orElseThrow(() -> new RuntimeException("Tutor não encontrado com id: " + id));        model.addAttribute("tutorCompleto", new TutorCompleto(tutor));
+                .orElseThrow(() -> new RuntimeException("Tutor não encontrado com id: " + id));
+
+        model.addAttribute("tutorCompleto", new TutorCompleto(tutor));
         return "tutorPageEdicao";
     }
 
+    @PutMapping("/atualizar")
+    @ResponseBody
+    public String atualizarTutor(@RequestBody TutorCompleto form) {
+        TutorModel tutorAtualizado = form.getTutor();
+        DadosSocioeconomicosModel dadosAtualizados = form.getDadosSocioeconomicos();
+
+        // Garante que ambos os lados da relação estão sincronizados
+        dadosAtualizados.setTutor(tutorAtualizado);
+        tutorAtualizado.setDadosSocioeconomicos(dadosAtualizados);
+
+        tutorService.atualizarTutorExistente(tutorAtualizado);
+        return "Atualizado com sucesso";
+    }
+
+    @PutMapping("/tutores/{id}/status")
+    @ResponseBody
+    public ResponseEntity<String> atualizarStatus(@PathVariable Long id, @RequestBody AtualizarStatusDTO dto) {
+        try {
+            tutorService.atualizarStatus(id, dto.getStatus());
+            return ResponseEntity.ok("Status atualizado com sucesso.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao atualizar status.");
+        }
+    }
 
 }

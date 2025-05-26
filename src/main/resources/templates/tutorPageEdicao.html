@@ -10,7 +10,13 @@
 <script src="/js/tutorPage.js" defer></script>
 
 <div class="container mt-5">
-    <form th:action="@{/tutores/atualizar}" th:object="${tutorCompleto}" method="put" class="row g-3">
+    <form th:action="@{/tutores/atualizar}" th:object="${tutorCompleto}" method="post">
+        <input type="hidden" name="_method" value="put"/>
+
+        <!-- Campos ocultos com os IDs -->
+        <input type="hidden" th:field="*{tutor.id}" />
+        <input type="hidden" th:field="*{dadosSocioeconomicos.id}" />
+
         <h2>IDENTIFICAÇÃO DO TUTOR</h2>
         <p><span>*</span> Campos Obrigatórios</p>
         <h3>ID    <span>1</span></h3>
@@ -326,9 +332,12 @@
             <textarea class="form-control" th:field="*{dadosSocioeconomicos.bensFamiliares}" rows="4" required></textarea>
         </div>
 
-        <div class="col-12 text-end mt-3">
-            <button type="submit" class="button-next">Salvar</button>
+        <div class="d-flex justify-content-end gap-2 mt-4">
+            <button type="button" class="btn btn-success me-2" onclick="atualizarStatusTutor('Aprovado')">Aprovar</button>
+            <button type="button" class="btn btn-danger" onclick="atualizarStatusTutor('Reprovado')">Reprovar</button>
+            <button type="submit" id="btnSalvarEdicao">Editar</button>
         </div>
+
     </form>
 </div>
 </body>
