@@ -12,6 +12,12 @@ public class TutorCompleto {
         this.dadosSocioeconomicos = new DadosSocioeconomicosModel();
     }
 
+    // Novo construtor adicionado
+    public TutorCompleto(TutorModel tutor) {
+        this.tutor = tutor;
+        this.dadosSocioeconomicos = tutor.getDadosSocioeconomicos();
+    }
+
     public TutorModel getTutor() {
         return tutor;
     }

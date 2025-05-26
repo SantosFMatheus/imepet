@@ -48,8 +48,8 @@
 
         <div class="filter-section-container">
             <div class="filter-div">
-                <input placeholder="Digite o nome do tutor">
-                <button>Filtrar</button>
+                <input id="filtro-nome-tutor" placeholder="Digite o nome do tutor">
+                <button id="botao-filtrar-nome">Filtrar</button>
             </div>
             <div class="button-filter-container">
                 <button id="button-aprovado">APROVADOS</button>
@@ -116,9 +116,10 @@
 </div>
 
 
-<a href="#" class="botao-fixo botao-atualizar" onclick="abrirPopup()">
+<a href="#" class="botao-fixo botao-atualizar" onclick="editarTutorSelecionado()">
     <img th:src="@{/img/mainPage/atualizar-icon.png}" alt="Botão atualizar cadastro">
 </a>
+
 <a href="#" class="botao-fixo" onclick="abrirPopup()">
     <img th:src="@{/img/mainPage/plus-icon.png}" alt="Botão fazer novo cadastro">
 </a>

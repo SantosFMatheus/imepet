@@ -48,11 +48,25 @@ public class TutorController {
 
     @GetMapping("/resumidos")
     @ResponseBody
-    public List<DadosTutorResumidoDTO> listarTutoresResumidos() {
-        List<TutorModel> tutores = tutorService.listarTodos();
+    public List<DadosTutorResumidoDTO> listarTutoresResumidos(@RequestParam(required = false) String nome) {
+        List<TutorModel> tutores;
+
+        if (nome != null && !nome.trim().isEmpty()) {
+            tutores = tutorService.buscarPorNome(nome);
+        } else {
+            tutores = tutorService.listarTodos();
+        }
+
         return tutores.stream()
                 .map(DadosTutorResumidoDTO::new)
                 .collect(Collectors.toList());
     }
+    @GetMapping("/editar/{id}")
+    public String editarTutor(@PathVariable Long id, Model model) {
+        TutorModel tutor = tutorService.buscarPorId(id)
+                .orElseThrow(() -> new RuntimeException("Tutor não encontrado com id: " + id));        model.addAttribute("tutorCompleto", new TutorCompleto(tutor));
+        return "tutorPageEdicao";
+    }
+
 
 }

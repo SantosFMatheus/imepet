@@ -39,6 +39,7 @@ public class TutorModel {
     private String tipoResidencia; // Urbana ou Rural
     private String situacaoImovel; // Próprio, Financiado, Cedido, Alugado
     private BigDecimal valorAluguel;
+    private String status = "Em análise"; // valor padrão ao criar novo tutor
 
 
     @OneToOne(mappedBy = "tutor", cascade = CascadeType.ALL)

@@ -1,49 +1,46 @@
 package com.imepac.imepet.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
+
+@Setter
+@Getter
 @Entity
-@Table(name = "usuarios") // opcional: define o nome da tabela
+@Table(name = "usuarios")
 public class UsuarioModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String nome;
+
+    @Column(unique = true)
     private String username;
+
     private String password;
 
-    // Construtor padrão obrigatório para JPA
+    private String email;
+
+    private String telefone;
+
+    private LocalDate dataCadastro;
+
+    // Construtor padrão
     public UsuarioModel() {
+        this.dataCadastro = LocalDate.now(); // data automática no construtor
     }
 
-    // Construtor com campos (opcional, útil para testes ou inicialização)
-    public UsuarioModel(String username, String password) {
+    // Construtor com campos principais (sem ID, que é gerado)
+    public UsuarioModel(String nome, String username, String password, String email, String telefone) {
+        this.nome = nome;
         this.username = username;
         this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        this.email = email;
+        this.telefone = telefone;
+        this.dataCadastro = LocalDate.now();
     }
 }

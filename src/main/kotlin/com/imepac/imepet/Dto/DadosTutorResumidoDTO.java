@@ -15,6 +15,7 @@ public class DadosTutorResumidoDTO {
     private String cpf;
     private String dataNascimento;
     private String rg;
+    private String status;
     private String celular;
 
     public DadosTutorResumidoDTO(TutorModel tutor) {
@@ -23,6 +24,8 @@ public class DadosTutorResumidoDTO {
         this.cpf = tutor.getCpf();
         this.dataNascimento = tutor.getDataNascimento().toString(); // ou formata como quiser
         this.celular = tutor.getCelular();
+        this.rg = tutor.getRg(); // ← ADICIONE ESTA LINHA
+        this.status = tutor.getStatus(); // ← ADICIONE ESTA LINHA
     }
 
     // Getters e setters (ou usa Lombok com @Getter @Setter)

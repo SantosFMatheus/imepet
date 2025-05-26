@@ -22,6 +22,9 @@ public class TutorService {
     }
 
     public TutorModel salvar(TutorModel tutor) {
+        if (tutor.getStatus() == null) {
+            tutor.setStatus("Em análise");
+        }
         return tutorRepository.save(tutor);
     }
 
@@ -43,7 +46,7 @@ public class TutorService {
             dados.put("id", tutor.getId());
             dados.put("nome", tutor.getNome());
             dados.put("dataNascimento", tutor.getDataNascimento());
-            dados.put("status", tutor.getEstadoCivil()); // ou outro campo, se preferir
+            dados.put("status", tutor.getStatus());
             dados.put("cpf", tutor.getCpf());
             dados.put("rg", tutor.getRg());
             dados.put("celular", tutor.getCelular());
@@ -51,7 +54,27 @@ public class TutorService {
         }).toList();
     }
 
+    public List<Map<String, Object>> listarCamposResumidosPorNome(String nome) {
+        return tutorRepository.findByNomeContainingIgnoreCase(nome).stream().map((TutorModel tutor) -> {
+            Map<String, Object> dados = new HashMap<>();
+            dados.put("id", tutor.getId());
+            dados.put("nome", tutor.getNome());
+            dados.put("dataNascimento", tutor.getDataNascimento());
+            dados.put("status", tutor.getStatus());
+            dados.put("cpf", tutor.getCpf());
+            dados.put("rg", tutor.getRg());
+            dados.put("celular", tutor.getCelular());
+            return dados;
+        }).toList();
+    }
+
+    public List<TutorModel> buscarPorNome(String nome) {
+        return tutorRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
     public boolean existePorId(Long id) {
         return tutorRepository.existsById(id);
     }
+
+
 }

@@ -32,6 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const botaoFiltrar = document.getElementById("botao-filtrar-nome");
+            if (botaoFiltrar) {
+                botaoFiltrar.addEventListener("click", () => {
+                    const nome = document.getElementById("filtro-nome-tutor").value;
+                    carregarTutoresResumidos(nome);
+                });
+    }
+
     // Carregar tutores resumidos via fetch
     carregarTutoresResumidos();
 });
@@ -55,9 +63,9 @@ function mostrarSecao(id, link) {
     if (link) {
         link.classList.add('active');
     }
-
     window.secaoAtual = id;
 }
+
 
 // Função abrir popup dependendo da seção atual
 function abrirPopup() {
@@ -82,8 +90,10 @@ function abrirPopup() {
     );
 }
 
-function carregarTutoresResumidos() {
-    fetch('/tutores/resumidos')
+function carregarTutoresResumidos(nome = '') {
+    const url = nome ? `/tutores/resumidos?nome=${encodeURIComponent(nome)}` : '/tutores/resumidos';
+
+    fetch(url)
         .then(response => response.json())
         .then(tutores => {
             const tbody = document.getElementById('tabela-tutores-body');
@@ -91,7 +101,6 @@ function carregarTutoresResumidos() {
 
             tutores.forEach(tutor => {
                 const tr = document.createElement('tr');
-
                 tr.innerHTML = `
                     <td>${tutor.id}</td>
                     <td>${formatarData(tutor.dataNascimento)}</td>
@@ -101,7 +110,6 @@ function carregarTutoresResumidos() {
                     <td>${tutor.rg}</td>
                     <td>${tutor.celular}</td>
                 `;
-
                 tbody.appendChild(tr);
             });
         })
@@ -112,5 +120,28 @@ function carregarTutoresResumidos() {
 
 function formatarData(dataISO) {
     const data = new Date(dataISO);
-    return data.toLocaleDateString('pt-BR');
+    return isNaN(data) ? '' : data.toLocaleDateString('pt-BR');
 }
+
+function editarTutorSelecionado() {
+    const linhaSelecionada = document.querySelector('#tabela-tutores-body tr.highlighted');
+    if (!linhaSelecionada) {
+        alert("Por favor, selecione uma linha da tabela antes de editar.");
+        return;
+    }
+
+    const id = linhaSelecionada.children[0].textContent.trim();
+    abrirPopupEdicao(id);
+}
+
+function abrirPopupEdicao(id) {
+    const url = `/tutores/editar/${id}`;
+    window.open(
+        url,
+        'popupEdicao',
+        'width=600,height=1200,scrollbars=yes'
+    );
+}
+
+
+
