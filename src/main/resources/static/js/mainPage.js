@@ -78,6 +78,19 @@ function mostrarSecao(id, link) {
     if (link) {
         link.classList.add('active');
     }
+
+    // Oculta ou mostra os botões de deletar/editar com base na seção ativa
+    const btnEditar = document.getElementById('btn-editar');
+    const btnRelatorio = document.getElementById('btn-relatorio');
+
+    if (id === 'administradores-section') {
+        if (btnEditar) btnEditar.classList.add('hidden');
+        if (btnRelatorio) btnRelatorio.classList.add('hidden');
+    } else {
+        if (btnEditar) btnEditar.classList.remove('hidden');
+        if (btnRelatorio) btnRelatorio.classList.remove('hidden');
+    }
+
     window.secaoAtual = id;
 }
 
@@ -91,7 +104,7 @@ function abrirPopup() {
             url = '/tutores/novo';
             break;
         case 'administradores-section':
-            url = 'https://www.google.com';
+            url = '/usuarios/novo';
             break;
         default:
             alert('Selecione uma seção antes de adicionar!');

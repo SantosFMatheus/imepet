@@ -36,7 +36,7 @@ public class UsuarioService {
         return usuario != null && usuario.getPassword().equals(password);
     }
 
-    public UsuarioModel cadastrarUsuario(UsuarioModel usuario) {
+    public UsuarioModel salvar(UsuarioModel usuario) {
         return usuarioRepository.save(usuario);
     }
 
@@ -44,11 +44,15 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public UsuarioModel buscarPorId(Long id) {
-        return usuarioRepository.findById(id).orElse(null);
+    public List<UsuarioModel> buscarPorNome(String nome) {
+        return usuarioRepository.findByNomeContainingIgnoreCase(nome);
     }
 
-    public void deletarUsuario(Long id) {
+    public java.util.Optional<UsuarioModel> buscarPorId(Long id) {
+        return usuarioRepository.findById(id);
+    }
+
+    public void excluir(Long id) {
         usuarioRepository.deleteById(id);
     }
 }
