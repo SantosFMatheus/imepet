@@ -107,4 +107,16 @@ public class TutorController {
         }
     }
 
+    @PostMapping("/deletar")
+    @ResponseBody
+    public ResponseEntity<String> deletarTutor(@RequestParam Long id) {
+        try {
+            tutorService.deletarPorId(id); // Vai apagar tutor e tudo relacionado via cascade
+            return ResponseEntity.ok("Tutor deletado com sucesso.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao deletar tutor.");
+        }
+    }
+
 }
