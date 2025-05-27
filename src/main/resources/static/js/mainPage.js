@@ -180,5 +180,59 @@ function abrirPopupEdicao(id) {
     );
 }
 
+const botaoFiltrarAdmins = document.querySelector('#administradores-section .filter-div button');
+if (botaoFiltrarAdmins) {
+    botaoFiltrarAdmins.addEventListener('click', () => {
+        const nomeAdmin = document.querySelector('#administradores-section .filter-div input').value;
+        carregarAdminsResumidos(nomeAdmin);
+    });
+}
+
+
+// Carrega a tabela de administradores inicialmente (sem filtro)
+carregarAdminsResumidos();
+
+function carregarAdminsResumidos(nome = '') {
+    let url = '/usuarios/resumidos';  // ajuste para o endpoint correto
+    if (nome) {
+        url += `?nome=${encodeURIComponent(nome)}`;
+    }
+
+    fetch(url)
+        .then(response => response.json())
+        .then(admins => {
+            const tbody = document.querySelector('#administradores-section table.table-cadastro tbody');
+            tbody.innerHTML = ''; // limpa tabela
+
+            admins.forEach(admin => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>#${admin.id}</td>
+                    <td>${formatarData(admin.dataCadastro)}</td>
+                    <td>${admin.nome}</td>
+                    <td>${admin.usuario}</td>
+                    <td>${admin.emailResponsavel}</td>
+                    <td>${admin.telefone}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao carregar administradores:', error);
+        });
+}
+
+// Destacar linha da tabela ao clicar na tabela administradores
+const adminTbody = document.querySelector('#administradores-section table.table-cadastro tbody');
+if (adminTbody) {
+    adminTbody.addEventListener('click', (event) => {
+        let tr = event.target.closest('tr');
+        if (!tr) return;
+
+        adminTbody.querySelectorAll('tr').forEach(row => row.classList.remove('highlighted'));
+        tr.classList.add('highlighted');
+    });
+}
+
 
 

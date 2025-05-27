@@ -20,42 +20,50 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    // ========================
+    // === PÁGINA: CADASTRO ===
+    // ========================
+
     @GetMapping("/novo")
-    public String novoUsuario(Model model) {
+    public String exibirFormularioCadastro(Model model) {
         model.addAttribute("usuario", new UsuarioModel());
-        return "cadastroAdminPage";
+        return "cadastroAdminPage"; // Página com o formulário de novo administrador
     }
 
     @PostMapping("/salvar")
-    public String salvarUsuario(@ModelAttribute("usuario") UsuarioModel usuario, Model model) {
+    public String salvarUsuario(@ModelAttribute("usuario") UsuarioModel usuario) {
         usuarioService.salvar(usuario);
-        return "popup-success"; // Página de confirmação
+        return "popup-success"; // Página de sucesso após salvar
     }
+
+    // ========================
+    // === LISTAGEM COMPLETA ==
+    // ========================
 
     @GetMapping("/listar")
     public String listarUsuarios(Model model) {
         List<UsuarioModel> usuarios = usuarioService.listarTodos();
         model.addAttribute("usuarios", usuarios);
-        return "usuariosListPage";
+        return "usuariosListPage"; // Página com a lista completa de usuários
     }
+
+    // ====================================
+    // === LISTAGEM VIA JSON (RESUMIDA) ===
+    // ====================================
 
     @GetMapping("/resumidos")
     @ResponseBody
-    public List<UsuarioModel> listarUsuariosResumidos(@RequestParam(required = false) String nome) {
-        if (nome != null && !nome.trim().isEmpty()) {
-            return usuarioService.buscarPorNome(nome);
-        } else {
-            return usuarioService.listarTodos();
-        }
+    public ResponseEntity<List<UsuarioModel>> listarUsuariosResumidos(@RequestParam(required = false) String nome) {
+        List<UsuarioModel> usuarios = (nome != null && !nome.trim().isEmpty())
+                ? usuarioService.buscarPorNome(nome)
+                : usuarioService.listarTodos();
+
+        return ResponseEntity.ok(usuarios);
     }
 
-    @GetMapping("/editar/{id}")
-    public String editarUsuario(@PathVariable Long id, Model model) {
-        UsuarioModel usuario = usuarioService.buscarPorId(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com id: " + id));
-        model.addAttribute("usuario", usuario);
-        return "usuarioPageEdicao";
-    }
+    // ========================
+    // === EXCLUSÃO DE USUÁRIO ==
+    // ========================
 
     @DeleteMapping("/excluir/{id}")
     @ResponseBody
@@ -65,7 +73,7 @@ public class UsuarioController {
             return ResponseEntity.ok("Usuário excluído com sucesso.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erro ao excluir usuário.");
+                    .body("Erro ao excluir usuário: " + e.getMessage());
         }
     }
 }

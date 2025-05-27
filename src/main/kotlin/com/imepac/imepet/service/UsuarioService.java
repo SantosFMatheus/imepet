@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -15,7 +16,8 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     /**
-     * Cria o usuário admin no banco de dados se ele ainda não existir.
+     * Cria um usuário administrador padrão no banco de dados
+     * caso ainda não exista ao iniciar a aplicação.
      */
     @PostConstruct
     public void initAdmin() {
@@ -23,7 +25,7 @@ public class UsuarioService {
             UsuarioModel admin = new UsuarioModel(
                     "Administrador do Sistema",
                     "admin",
-                    "1234",
+                    "1234", // ⚠️ Você pode depois criptografar essa senha
                     "admin@imepac.com",
                     "(34) 99999-9999"
             );
@@ -31,10 +33,7 @@ public class UsuarioService {
         }
     }
 
-    public boolean autenticar(String username, String password) {
-        UsuarioModel usuario = usuarioRepository.findByUsername(username);
-        return usuario != null && usuario.getPassword().equals(password);
-    }
+    // ----------- CRUD Principal -----------
 
     public UsuarioModel salvar(UsuarioModel usuario) {
         return usuarioRepository.save(usuario);
@@ -44,15 +43,28 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public List<UsuarioModel> buscarPorNome(String nome) {
-        return usuarioRepository.findByNomeContainingIgnoreCase(nome);
-    }
-
-    public java.util.Optional<UsuarioModel> buscarPorId(Long id) {
+    public Optional<UsuarioModel> buscarPorId(Long id) {
         return usuarioRepository.findById(id);
     }
 
     public void excluir(Long id) {
         usuarioRepository.deleteById(id);
+    }
+
+    // ----------- Buscas Personalizadas -----------
+
+    public UsuarioModel buscarPorUsername(String username) {
+        return usuarioRepository.findByUsername(username);
+    }
+
+    public List<UsuarioModel> buscarPorNome(String nome) {
+        return usuarioRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
+    // ----------- Autenticação (Simples) -----------
+
+    public boolean autenticar(String username, String password) {
+        UsuarioModel usuario = usuarioRepository.findByUsername(username);
+        return usuario != null && usuario.getPassword().equals(password);
     }
 }
