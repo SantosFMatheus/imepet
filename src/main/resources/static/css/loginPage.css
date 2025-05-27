@@ -46,7 +46,7 @@ table {
 /* CSS RESET */
 
 :root {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-image: url("../img/loginPage/login-background.jpg");
     background-size: cover;           
     background-repeat: no-repeat;
@@ -109,10 +109,16 @@ form input:focus {
 
 form button{
     margin-top: 12px;
+    font-weight: bold;
     width: 150px;
     padding: 14px;
     color: white;
     border: none;
     border-radius: 12px;
     background: linear-gradient(to right, #00528B, #01828B, #00AA95);
+}
+
+form button:hover {
+    opacity: 0.9;
+    cursor: pointer;
 }

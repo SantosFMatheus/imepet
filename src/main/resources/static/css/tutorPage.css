@@ -1,3 +1,12 @@
+:root{
+    font-family: 'Inter', sans-serif;
+}
+
+body{
+    background: linear-gradient(to right, #004470, #016B70, #008C7A);
+    color:white;
+}
+
 label span,
 p span{
     font-weight: bold;

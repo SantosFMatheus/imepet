@@ -49,7 +49,6 @@ table {
     font-family: 'Inter', sans-serif;
 }
 
-
 .hidden {
     display: none !important;
 }
@@ -73,7 +72,6 @@ header{
     font-size: 18px;
 }
 
-
 .logo{
     width: 130px;
     height: auto;
@@ -83,6 +81,11 @@ header{
 header img{
     width: 50px;
     height: auto;
+}
+
+header p {
+    font-size: 16px;
+    text-align: center;
 }
 
 .center-div{
@@ -278,8 +281,6 @@ header img{
     background-color: #630103;
 }
 
-
-
 .table-cadastro {
     margin-top: 20px;
     width: 75%;
@@ -340,8 +341,17 @@ tr.highlighted {
 }
 
 .botao-atualizar{
+    right: 325px;
+}
+
+.botao-deletar{
     right: 210px;
 }
+
+.botao-relatorio{
+    right: 440px;
+}
+
 
 /* RESPONSIVIDADE: Seções e filtros */
 
