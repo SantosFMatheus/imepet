@@ -52,8 +52,8 @@ public class UsuarioController {
     @GetMapping("/listar")
     public String listarUsuarios(Model model) {
         List<UsuarioModel> usuarios = usuarioService.listarTodos();
-        model.addAttribute("usuarios", usuarios);
-        return "usuariosListPage"; // Página com a lista completa de usuários
+        model.addAttribute("admins", usuarios); // <-- nome compatível com o HTML
+        return "usuariosListPage";
     }
 
     // ====================================
