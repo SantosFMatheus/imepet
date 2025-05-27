@@ -1,68 +1,100 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const btnSalvar = document.getElementById("btnSalvarEdicao");
 
-    btnSalvar.addEventListener("click", function () {
-        const form = document.getElementById("formTutorEdicao");
-        const formData = new FormData(form);
+    const btnAprovar = document.getElementById("btnAprovar");
+        const btnReprovar = document.getElementById("btnReprovar");
 
-        // Converte o FormData para um objeto JS
-        const tutorData = {};
-        formData.forEach((value, key) => {
-            // Lida com campos aninhados tipo dadosSocioeconomicos.campo
-            const keys = key.split('.');
-            if (keys.length > 1) {
-                if (!tutorData[keys[0]]) {
-                    tutorData[keys[0]] = {};
-                }
-                tutorData[keys[0]][keys[1]] = value;
-            } else {
-                tutorData[key] = value;
-            }
-        });
+        if (btnAprovar) {
+            btnAprovar.addEventListener("click", function () {
+                atualizarStatusTutor("APROVADO");
+            });
+        }
 
-        fetch("/tutores/atualizar", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(tutorData)
-        })
-        .then(response => {
-            if (response.ok) {
-                alert("Cadastro atualizado com sucesso!");
-                window.location.reload(); // ou feche o popup, se for o caso
-            } else {
-                alert("Erro ao atualizar o cadastro.");
-            }
-        })
-        .catch(error => {
-            console.error("Erro ao atualizar:", error);
-            alert("Erro ao atualizar o cadastro.");
-        });
-    });
+        if (btnReprovar) {
+            btnReprovar.addEventListener("click", function () {
+                atualizarStatusTutor("REPROVADO");
+            });
+        }
+
+
 });
 
-function atualizarStatusTutor(novoStatus) {
-    const tutorId = document.querySelector('input[name="tutor.id"]').value;
+function atualizarTutor() {
+    const form = document.getElementById("formAtualizarTutor");
+    const formData = new FormData(form);
 
-    fetch(`/tutores/${tutorId}/status`, {
-        method: 'PUT',
+    const jsonObject = {};
+    formData.forEach((value, key) => {
+        // Se já existe, transforma em array (para campos repetidos como checkboxes)
+        if (jsonObject.hasOwnProperty(key)) {
+            if (!Array.isArray(jsonObject[key])) {
+                jsonObject[key] = [jsonObject[key]];
+            }
+            jsonObject[key].push(value);
+        } else {
+            jsonObject[key] = value;
+        }
+    });
+
+    fetch('/tutores/atualizar', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ status: novoStatus })
+        body: JSON.stringify(jsonObject)
     })
     .then(response => {
         if (response.ok) {
-            alert(`Status atualizado para: ${novoStatus}`);
-            window.close(); // fecha o popup
-            window.opener.location.reload(); // recarrega a página principal
+            alert("Tutor atualizado com sucesso!");
+            // Fecha o popup (ajuste ao seu método, ex: usando modal do Bootstrap)
+            fecharPopup();
+            // Recarrega a lista de tutores na página principal
+            atualizarTabelaTutores();
         } else {
-            alert('Erro ao atualizar o status.');
+            return response.text().then(text => { throw new Error(text) });
         }
     })
     .catch(error => {
-        console.error(error);
-        alert('Erro ao conectar com o servidor.');
+        console.error("Erro ao atualizar tutor:", error);
+        alert("Erro ao atualizar tutor.");
     });
 }
+
+function atualizarStatusTutor(novoStatus) {
+            const idTutor = document.querySelector('input[name="tutor.id"]').value;
+
+            fetch(`/tutores/${idTutor}/status`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: novoStatus })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert(`Tutor ${novoStatus.toLowerCase()} com sucesso!`);
+                    window.location.reload(); // ou feche o popup se for o caso
+                } else {
+                    alert("Erro ao atualizar o status do tutor.");
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                alert("Erro na requisição.");
+            });
+        }
+
+function fecharPopup() {
+    // Exemplo: se usar Bootstrap Modal:
+    const modal = bootstrap.Modal.getInstance(document.getElementById('tutorModal'));
+    modal.hide();
+}
+
+function atualizarTabelaTutores() {
+    // Suponha que você tenha esta função na página principal
+    if (window.carregarTutoresResumidos) {
+        window.carregarTutoresResumidos();
+    } else {
+        location.reload(); // fallback
+    }
+}
+

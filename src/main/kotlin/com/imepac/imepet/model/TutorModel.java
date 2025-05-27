@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Getter
 @Setter
 @Entity
@@ -20,6 +22,7 @@ public class TutorModel {
     private String cpf;
     private String rg;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
     private String naturalidade;
     private String estadoCivil;

@@ -3,6 +3,7 @@ package com.imepac.imepet.Dto;
 import com.imepac.imepet.model.TutorModel;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 @Getter
@@ -13,6 +14,7 @@ public class DadosTutorResumidoDTO {
     private Long id;
     private String nome;
     private String cpf;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String dataNascimento;
     private String rg;
     private String status;

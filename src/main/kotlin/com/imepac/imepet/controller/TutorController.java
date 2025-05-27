@@ -83,9 +83,9 @@ public class TutorController {
         return "tutorPageEdicao";
     }
 
-    @PutMapping("/atualizar")
+    @PostMapping("/atualizar")
     @ResponseBody
-    public String atualizarTutor(@RequestBody TutorCompleto form) {
+    public String atualizarTutor(@ModelAttribute TutorCompleto form) {
         TutorModel tutorAtualizado = form.getTutor();
         DadosSocioeconomicosModel dadosAtualizados = form.getDadosSocioeconomicos();
 
@@ -97,7 +97,7 @@ public class TutorController {
         return "Atualizado com sucesso";
     }
 
-    @PutMapping("/tutores/{id}/status")
+    @PostMapping("/{id}/status")
     @ResponseBody
     public ResponseEntity<String> atualizarStatus(@PathVariable Long id, @RequestBody AtualizarStatusDTO dto) {
         try {
