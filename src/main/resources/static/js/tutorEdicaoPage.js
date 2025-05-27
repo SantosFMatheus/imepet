@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function atualizarStatusTutor(status) {
-const tutorId = document.getElementById("id").value;
+const tutorId = document.getElementById("tutorId").value;
      console.log("Atualizando tutor", tutorId, "para status", status);
 
     const formData = new FormData();

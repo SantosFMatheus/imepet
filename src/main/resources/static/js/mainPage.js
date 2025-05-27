@@ -167,5 +167,22 @@ function abrirPopupEdicao(id) {
     );
 }
 
+function exportarTabela() {
+    // Seleciona a tabela pelo seletor da classe
+    const tabela = document.querySelector(".table-cadastro");
+
+    if (!tabela) {
+        console.warn("Tabela não encontrada!");
+        return;
+    }
+
+    // Converte a tabela para um workbook
+    const workbook = XLSX.utils.table_to_book(tabela, {
+        sheet: "Tutores"
+    });
+
+    // Salva o arquivo
+    XLSX.writeFile(workbook, 'tabela_tutores.xlsx');
+}
 
 
