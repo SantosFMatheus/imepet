@@ -45,17 +45,11 @@ const tutorId = document.getElementById("tutorId").value;
 }
 
 function fecharPopup() {
-    const modalEl = document.getElementById('tutorModal');
-    const modal = bootstrap.Modal.getInstance(modalEl);
-
-    // Escuta o evento quando o modal terminou de fechar
-    modalEl.addEventListener('hidden.bs.modal', function () {
-        window.location.reload();
-    }, { once: true }); // só dispara uma vez
-
-    modal.hide();
+    if (window.opener && !window.opener.closed) {
+        window.opener.location.reload();  // recarrega a página mãe
+    }
+    window.close();  // fecha a janela popup
 }
-
 
 function atualizarTabelaTutores() {
     // Suponha que você tenha esta função na página principal

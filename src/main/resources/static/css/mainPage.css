@@ -181,6 +181,26 @@ header p {
     opacity: 0.6;
 }
 
+.helpBtn {
+    position: absolute;
+    bottom: 25px;
+    left: 70%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.helpBtn img {
+    border: 2px solid black;
+    border-radius: 40px;
+    width: 35px;
+    height: auto;
+    transition: opacity 0.3s;
+}
+
+.helpBtn img:hover {
+    opacity: 0.6;
+}
+
 .initial-section{
     width: calc(100% - 400px);
     height: calc(100vh - 100px);
@@ -421,5 +441,3 @@ tr.highlighted {
         padding: 10px 14px;
     }
 }
-
-

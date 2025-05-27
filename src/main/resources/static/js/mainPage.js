@@ -241,5 +241,13 @@ if (adminTbody) {
     });
 }
 
+// Recarrega a página de origem quando o popup for fechado
+window.addEventListener('unload', () => {
+    if (window.opener && !window.opener.closed) {
+        window.opener.location.reload();
+    }
+});
+
+
 
 
