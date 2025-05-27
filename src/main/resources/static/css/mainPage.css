@@ -177,6 +177,10 @@ header p {
     transition: opacity 0.3s;
 }
 
+.quitBtn img:hover {
+    opacity: 0.6;
+}
+
 .initial-section{
     width: calc(100% - 400px);
     height: calc(100vh - 100px);

@@ -37,9 +37,11 @@
                 </a>
             </div>
         </div>
-        <a th:href="@{/login}" class="quitBtn">
-            <img id="quitBtn" th:src="@{/img/mainPage/quit.png}" alt="Sair">
-        </a>
+        <form th:action="@{/usuarios/logout}" method="post" class="quitBtn">
+            <button type="submit" style="all: unset; cursor: pointer;">
+                <img th:src="@{/img/mainPage/quit.png}" alt="Sair">
+            </button>
+        </form>
     </section>
 
     <section id="initial-section" class="initial-section">

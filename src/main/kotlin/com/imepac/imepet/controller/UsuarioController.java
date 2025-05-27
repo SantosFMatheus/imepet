@@ -2,6 +2,7 @@ package com.imepac.imepet.controller;
 
 import com.imepac.imepet.model.UsuarioModel;
 import com.imepac.imepet.service.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,12 @@ public class UsuarioController {
 
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // Encerra a sessão
+        return "redirect:/login"; // Redireciona para a página de login
     }
 
     // ========================

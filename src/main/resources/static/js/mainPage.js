@@ -1,15 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Botão sair fica vermelho ao passar mouse
-    const quitBtn = document.getElementById("quitBtn");
-    if (quitBtn) {
-        quitBtn.addEventListener("mouseover", () => {
-            quitBtn.src = "/img/mainPage/quit-red.png";
-        });
-        quitBtn.addEventListener("mouseout", () => {
-            quitBtn.src = "/img/mainPage/quit.png";
-        });
-    }
-
     // Botões menu dinâmicos (toggle active)
     const links = document.querySelectorAll(".menu-link");
     links.forEach(link => {

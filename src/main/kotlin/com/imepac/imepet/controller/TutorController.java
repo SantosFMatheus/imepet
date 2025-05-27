@@ -84,17 +84,15 @@ public class TutorController {
     }
 
     @PostMapping("/atualizar")
-    @ResponseBody
     public String atualizarTutor(@ModelAttribute TutorCompleto form) {
         TutorModel tutorAtualizado = form.getTutor();
         DadosSocioeconomicosModel dadosAtualizados = form.getDadosSocioeconomicos();
 
-        // Garante que ambos os lados da relação estão sincronizados
         dadosAtualizados.setTutor(tutorAtualizado);
         tutorAtualizado.setDadosSocioeconomicos(dadosAtualizados);
 
         tutorService.atualizarTutorExistente(tutorAtualizado);
-        return "popup-success";
+        return "popup-success";  // aqui vai renderizar a página popup-success.html
     }
 
     @PostMapping("/{id}/status")
