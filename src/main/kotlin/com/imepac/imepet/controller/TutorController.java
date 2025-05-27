@@ -94,12 +94,12 @@ public class TutorController {
         tutorAtualizado.setDadosSocioeconomicos(dadosAtualizados);
 
         tutorService.atualizarTutorExistente(tutorAtualizado);
-        return "Atualizado com sucesso";
+        return "popup-success";
     }
 
     @PostMapping("/{id}/status")
     @ResponseBody
-    public ResponseEntity<String> atualizarStatus(@PathVariable Long id, @RequestBody AtualizarStatusDTO dto) {
+    public ResponseEntity<String> atualizarStatus(@PathVariable Long id, @ModelAttribute AtualizarStatusDTO dto) {
         try {
             tutorService.atualizarStatus(id, dto.getStatus());
             return ResponseEntity.ok("Status atualizado com sucesso.");

@@ -7,13 +7,13 @@
     <link href="/css/tutorPage.css" rel="stylesheet">
 </head>
 <body>
-<script src="/js/tutorPage.js" defer></script>
+<script src="/js/tutorEdicaoPage.js" defer></script>
 
 <div class="container mt-5">
     <form id="formAtualizarTutor" th:action="@{/tutores/atualizar}" th:object="${tutorCompleto}" method="post">
 
     <!-- Campos ocultos com os IDs -->
-        <input type="hidden" th:field="*{tutor.id}" />
+        <input type="hidden" id="tutorId" th:field="*{tutor.id}" />
         <input type="hidden" th:field="*{dadosSocioeconomicos.id}" />
 
         <h2>IDENTIFICAÇÃO DO TUTOR</h2>
@@ -332,8 +332,8 @@
         </div>
 
         <div class="d-flex justify-content-end gap-2 mt-4">
-            <button type="submit" class="btn btn-success" id="btnAprovar">Aprovar</button>
-            <button type="submit" class="btn btn-danger" id="btnReprovar">Reprovar</button>
+            <button type="button" class="btn btn-success" id="btnAprovar">Aprovar</button>
+            <button type="button" class="btn btn-danger" id="btnReprovar">Reprovar</button>
             <button type="submit" class="btn btn-primary" id="btnAtualizarTutor">Salvar Alterações</button>
         </div>
 
