@@ -57,6 +57,46 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+    const btnDeletar = document.getElementById("btn-deletar");
+
+    btnDeletar.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const linhaSelecionada = document.querySelector(".table-cadastro tbody tr.highlighted");
+        if (!linhaSelecionada) {
+            alert("Selecione um tutor para deletar.");
+            return;
+        }
+
+        const id = linhaSelecionada.querySelector("td")?.innerText;
+        if (!id || isNaN(id)) {
+            alert("ID inválido.");
+            return;
+        }
+
+        if (!confirm(`Tem certeza que deseja deletar o tutor com ID ${id}?`)) return;
+
+        fetch('/tutores/deletar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `id=${encodeURIComponent(id)}`
+        })
+        .then(response => {
+            if (response.ok) {
+                linhaSelecionada.remove();
+                alert(`Tutor ${id} deletado com sucesso.`);
+            } else {
+                alert("Erro ao deletar tutor.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao deletar tutor:", error);
+            alert("Erro de rede.");
+        });
+    });
+
 });
 
 // Função para mostrar seção conforme menu clicado
@@ -181,7 +221,6 @@ function abrirPopupEdicao(id) {
 }
 
 function exportarTabela() {
-    // Seleciona a tabela pelo seletor da classe
     const tabela = document.querySelector(".table-cadastro");
 
     if (!tabela) {
@@ -189,12 +228,10 @@ function exportarTabela() {
         return;
     }
 
-    // Converte a tabela para um workbook
     const workbook = XLSX.utils.table_to_book(tabela, {
         sheet: "Tutores"
     });
 
-    // Salva o arquivo
     XLSX.writeFile(workbook, 'tabela_tutores.xlsx');
 }
 

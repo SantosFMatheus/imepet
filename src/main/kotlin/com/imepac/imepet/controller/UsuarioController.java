@@ -1,5 +1,6 @@
 package com.imepac.imepet.controller;
 
+import com.imepac.imepet.Dto.UsuarioResumoDTO;
 import com.imepac.imepet.model.UsuarioModel;
 import com.imepac.imepet.service.UsuarioService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -53,12 +55,17 @@ public class UsuarioController {
 
     @GetMapping("/resumidos")
     @ResponseBody
-    public ResponseEntity<List<UsuarioModel>> listarUsuariosResumidos(@RequestParam(required = false) String nome) {
+    public ResponseEntity<List<UsuarioResumoDTO>> listarUsuariosResumidos(@RequestParam(required = false) String nome) {
         List<UsuarioModel> usuarios = (nome != null && !nome.trim().isEmpty())
                 ? usuarioService.buscarPorNome(nome)
                 : usuarioService.listarTodos();
 
-        return ResponseEntity.ok(usuarios);
+        // Mapeia para DTO
+        List<UsuarioResumoDTO> dtos = usuarios.stream()
+                .map(UsuarioResumoDTO::new)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
     }
 
     // ========================
