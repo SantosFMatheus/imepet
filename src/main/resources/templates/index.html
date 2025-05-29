@@ -20,7 +20,17 @@
             </div>
             <button type="submit">Entrar</button>
         </form>
+        <img class="imepac-logo" th:src="@{/img/logo-imepac-azul.png}" alt="Logo IMEPAC">
     </section>
 </div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let error = [[${error != null}]];
+    if (error) {
+        alert('[[${error}]]');
+        history.replaceState(null, '', location.pathname); // limpa os parâmetros
+    }
+    /*]]>*/
+</script>
 </body>
 </html>
