@@ -85,7 +85,7 @@
     <section id="administradores-section" class="table-section hidden">
 
         <div class="filter-div">
-            <input placeholder="Digite o nome do administrador">
+            <input id="filtro-nome-admin" placeholder="Digite o nome do administrador">
             <button>Filtrar</button>
         </div>
 
@@ -131,4 +131,7 @@
 </a>
 
 </body>
+<script>
+    window.isAdmin = /*[[${session.isAdmin}]]*/ false;
+</script>
 </html>
