@@ -25,7 +25,7 @@ public class UsuarioService {
             UsuarioModel admin = new UsuarioModel(
                     "Administrador do Sistema",
                     "admin",
-                    "1234", // ⚠️ Você pode depois criptografar essa senha
+                    "imepet@1234", // ⚠️ Você pode depois criptografar essa senha
                     "admin@imepac.com",
                     "(34) 99999-9999"
             );

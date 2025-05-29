@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+if (!window.isAdmin) {
+        const adminMenuItem = document.querySelector('[onclick*="administradores-section"]');
+        if (adminMenuItem) adminMenuItem.remove();
+
+        const adminSection = document.getElementById("administradores-section");
+        if (adminSection) adminSection.remove();
+    }
+
     // Botões menu dinâmicos (toggle active)
     const links = document.querySelectorAll(".menu-link");
     links.forEach(link => {
@@ -53,19 +62,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const linhaSelecionada = document.querySelector(".table-cadastro tbody tr.highlighted");
         if (!linhaSelecionada) {
-            alert("Selecione um tutor para deletar.");
+            alert("Selecione um item para deletar.");
             return;
         }
 
-        const id = linhaSelecionada.querySelector("td")?.innerText;
+        const id = linhaSelecionada.querySelector("td")?.innerText.trim();
         if (!id || isNaN(id)) {
             alert("ID inválido.");
             return;
         }
 
-        if (!confirm(`Tem certeza que deseja deletar o tutor com ID ${id}?`)) return;
+        let url = '';
+        let entidade = '';
 
-        fetch('/tutores/deletar', {
+        switch (window.secaoAtual) {
+            case 'visao-geral-section':
+                url = '/tutores/deletar';
+                entidade = 'tutor';
+                break;
+            case 'administradores-section':
+                url = '/usuarios/deletar';
+                entidade = 'administrador';
+                break;
+            default:
+                alert('Seção inválida ou não suportada para deletar.');
+                return;
+        }
+
+        // ⚠️ Verifica se o nome é "admin"
+            const nome = linhaSelecionada.children[2]?.textContent.trim().toLowerCase();
+            if (entidade === 'administrador' && nome === 'administrador do sistema') {
+                alert("O administrador principal não pode ser excluído.");
+                return;
+            }
+
+        if (!confirm(`Tem certeza que deseja deletar o ${entidade} com ID ${id}?`)) return;
+
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -75,13 +108,13 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => {
             if (response.ok) {
                 linhaSelecionada.remove();
-                alert(`Tutor ${id} deletado com sucesso.`);
+                alert(`${entidade.charAt(0).toUpperCase() + entidade.slice(1)} ${id} deletado com sucesso.`);
             } else {
-                alert("Erro ao deletar tutor.");
+                alert(`Erro ao deletar ${entidade}.`);
             }
         })
         .catch(error => {
-            console.error("Erro ao deletar tutor:", error);
+            console.error(`Erro ao deletar ${entidade}:`, error);
             alert("Erro de rede.");
         });
     });

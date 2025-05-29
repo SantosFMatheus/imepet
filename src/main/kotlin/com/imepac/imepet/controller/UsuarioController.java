@@ -79,15 +79,16 @@ public class UsuarioController {
     // === EXCLUSÃO DE USUÁRIO ==
     // ========================
 
-    @DeleteMapping("/excluir/{id}")
+    @PostMapping("/deletar")
     @ResponseBody
-    public ResponseEntity<String> excluirUsuario(@PathVariable Long id) {
+    public ResponseEntity<String> deletarUsuario(@RequestParam Long id) {
         try {
             usuarioService.excluir(id);
-            return ResponseEntity.ok("Usuário excluído com sucesso.");
+            return ResponseEntity.ok("Usuário deletado com sucesso.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erro ao excluir usuário: " + e.getMessage());
+                    .body("Erro ao deletar usuário: " + e.getMessage());
         }
     }
+
 }

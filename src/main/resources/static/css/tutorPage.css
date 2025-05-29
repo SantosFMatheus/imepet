@@ -29,4 +29,13 @@ p span{
     background-color: #003f6b;
 }
 
+input:disabled,
+select:disabled,
+textarea:disabled {
+    opacity: 0.8 !important;
+    cursor: not-allowed;
+}
+
+
+
 
