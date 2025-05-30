@@ -1,10 +1,14 @@
 package com.imepac.imepet.controller;
 
 import com.imepac.imepet.model.DadosSocioeconomicosModel;
+import com.imepac.imepet.model.DadosSocioeconomicosModel;
 import com.imepac.imepet.service.DadosSocioeconomicosService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/socioeconomico")
@@ -27,4 +31,6 @@ public class DadosSocioeconomicosController {
         service.salvar(dados);
         return "redirect:/sucesso"; // ou próxima etapa
     }
+
 }
+
