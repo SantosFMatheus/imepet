@@ -1,13 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-if (!window.isAdmin) {
-        const adminMenuItem = document.querySelector('[onclick*="administradores-section"]');
-        if (adminMenuItem) adminMenuItem.remove();
-
-        const adminSection = document.getElementById("administradores-section");
-        if (adminSection) adminSection.remove();
-    }
-
     // Botões menu dinâmicos (toggle active)
     const links = document.querySelectorAll(".menu-link");
     links.forEach(link => {
@@ -66,11 +58,13 @@ if (!window.isAdmin) {
             return;
         }
 
-        const id = linhaSelecionada.querySelector("td")?.innerText.trim();
-        if (!id || isNaN(id)) {
-            alert("ID inválido.");
-            return;
-        }
+       const idRaw = linhaSelecionada.querySelector("td")?.innerText.trim();
+       const id = idRaw?.replace(/^#/, ''); // remove # se existir
+
+       if (!id || isNaN(id)) {
+           alert("ID inválido.");
+           return;
+       }
 
         let url = '';
         let entidade = '';

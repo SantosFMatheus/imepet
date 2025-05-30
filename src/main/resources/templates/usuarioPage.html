@@ -22,13 +22,13 @@
 <div class="center-div">
     <section class="menu-bar">
         <div class="menu-options-container">
-            <div class="menu-item">
+            <div class="menu-item" >
                 <a href="#" class="menu-link active" onclick="mostrarSecao('visao-geral-section', this)">
                     <img th:src="@{img/mainPage/visao-geral-icon.png}" alt="Icone da sessão visão geral">
                     <p>Visão Geral</p>
                 </a>
             </div>
-            <div class="menu-item">
+            <div class="menu-item" th:if="${isAdmin}">
                 <a href="#" class="menu-link" onclick="mostrarSecao('administradores-section', this)">
                     <img th:src="@{/img/mainPage/admin-icon.png}" alt="Icone da sessão de administradores">
                     <p>Administradores</p>
@@ -82,7 +82,7 @@
         </table>
     </section>
 
-    <section id="administradores-section" class="table-section hidden">
+    <section id="administradores-section" class="table-section hidden" th:if="${isAdmin}">
 
         <div class="filter-div">
             <input id="filtro-nome-admin" placeholder="Digite o nome do administrador">
@@ -102,7 +102,7 @@
             </thead>
             <tbody>
             <tr th:each="admin : ${admins}">
-                <td th:text="'#' + ${admin.id}">#001</td>
+                <td th:text="${admin.id}">1</td>
                 <td th:text="${admin.dataCadastro}">29/04</td>
                 <td th:text="${admin.nome}">Cadastro 001</td>
                 <td th:text="${admin.usuario}">Matheus felipe</td>
@@ -131,7 +131,4 @@
 </a>
 
 </body>
-<script>
-    window.isAdmin = /*[[${session.isAdmin}]]*/ false;
-</script>
 </html>

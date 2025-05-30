@@ -26,10 +26,13 @@ public class LoginController {
                               Model model) {
 
         if (usuarioService.autenticar(username, password)) {
-            // Recupera o usuário completo pelo username para pegar o nome
             UsuarioModel usuario = usuarioService.buscarPorUsername(username);
-            // Salva o usuário na sessão
             session.setAttribute("usuarioLogado", usuario);
+
+            // Define se é admin
+            boolean isAdmin = usuario.getUsername().equalsIgnoreCase("admin");
+            session.setAttribute("isAdmin", isAdmin);
+
             return "redirect:/usuarioPage";
         } else {
             model.addAttribute("error", "Usuário ou senha inválidos");
@@ -37,14 +40,21 @@ public class LoginController {
         }
     }
 
+
     @GetMapping("/usuarioPage")
     public String showUsuarioPage(HttpSession session, Model model) {
         UsuarioModel usuario = (UsuarioModel) session.getAttribute("usuarioLogado");
+
         if (usuario != null) {
             model.addAttribute("nomeUsuario", usuario.getNome());
+            model.addAttribute("isAdmin", session.getAttribute("isAdmin")); // <-- Adiciona aqui
         } else {
             model.addAttribute("nomeUsuario", "Visitante");
+            model.addAttribute("isAdmin", false); // valor padrão
         }
-        return "usuarioPage"; // Renderiza o arquivo usuarioPage.html em templates
+
+        return "usuarioPage";
     }
+
+
 }

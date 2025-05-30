@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,9 +42,14 @@ public class UsuarioController {
     }
 
     @PostMapping("/salvar")
-    public String salvarUsuario(@ModelAttribute("usuario") UsuarioModel usuario) {
-        usuarioService.salvar(usuario);
-        return "popup-success"; // Página de sucesso após salvar
+    public String salvarUsuario(@ModelAttribute("usuario") UsuarioModel usuario, Model model) {
+        try {
+            usuarioService.salvar(usuario);
+            return "popup-success"; // Página de sucesso após salvar
+        } catch (DataIntegrityViolationException e) {
+            model.addAttribute("erro", "Já existe um usuário com esse nome de usuário.");
+            return "popup-failure"; // Retorna à página de cadastro com a mensagem de erro
+        }
     }
 
     // ========================
