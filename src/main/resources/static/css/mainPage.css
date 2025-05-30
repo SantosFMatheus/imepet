@@ -1,0 +1,443 @@
+/* CSS RESET */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/* CSS RESET */
+
+:root{
+    font-family: 'Inter', sans-serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 125px;
+    background-color: #0069B3;
+}
+
+.user-div{
+    display: flex;
+    width: 200px;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 95px;
+    color: white;
+    font-size: 18px;
+}
+
+.logo{
+    width: 165px;
+    height: auto;
+    margin-left: 95px;
+}
+
+header img{
+    width: 50px;
+    height: auto;
+}
+
+header p {
+    font-size: 16px;
+    text-align: center;
+}
+
+.center-div{
+    display:flex;
+}
+
+.menu-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: calc(100vh - 125px);
+    background-color: white;
+    position: relative;
+}
+
+.menu-options-container{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+}
+
+.menu-item {
+    margin: 8px;
+    width: 220px;
+    height: 50px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.menu-item a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    height: 100%;
+    padding: 0 12px;
+    text-decoration: none;
+    color: #D9D9D9;
+    font-family: sans-serif;
+}
+
+.menu-item a img {
+    width: 28px;
+    height: 28px;
+}
+
+.menu-item a p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    flex: 1;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    height: 100%;
+    padding: 0 12px;
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+    transition: background-color 0.3s;
+}
+
+.menu-link.active {
+    background-color: #0067A6;
+    color: white;
+}
+
+.quitBtn {
+    position: absolute;
+    bottom: 20px;
+    left: 25%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.quitBtn img {
+    border: 2px solid black;
+    border-radius: 40px;
+    width: 50px;
+    height: auto;
+    transition: opacity 0.3s;
+}
+
+.quitBtn img:hover {
+    opacity: 0.6;
+}
+
+.helpBtn {
+    position: absolute;
+    bottom: 25px;
+    left: 70%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.helpBtn img {
+    border: 2px solid black;
+    border-radius: 40px;
+    width: 35px;
+    height: auto;
+    transition: opacity 0.3s;
+}
+
+.helpBtn img:hover {
+    opacity: 0.6;
+}
+
+.initial-section{
+    width: calc(100% - 400px);
+    height: calc(100vh - 125px);
+    background-image: url('../img/mainPage/background-table-section.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.table-section{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 400px);
+    height: calc(100vh - 125px);
+    background-image: url('../img/mainPage/background-table-section.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+}
+
+.administradores-section{
+    display: flex;
+    width: calc(100% - 400px);
+    height: calc(100vh - 125px);
+    background-image: url('../img/mainPage/background-table-section.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-items: normal;
+    justify-content: center;
+}
+
+.filter-section-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 625px;
+    margin-bottom: 20px;
+}
+
+.filter-div {
+    gap: 20px;
+    display: flex;
+}
+
+.filter-div input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.filter-div button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.filter-div button:hover {
+    background-color: #003f6b;
+}
+
+.button-filter-container {
+    display: flex;
+    gap: 20px;
+}
+
+.button-filter-container button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.button-filter-container button:hover {
+    background-color: #0056b3;
+}
+
+#button-aprovado{
+    background-color: #008675;
+}
+
+#button-aprovado:hover{
+    background-color: #006558;
+}
+
+#button-reprovado{
+    background-color: #860002;
+}
+
+#button-reprovado:hover{
+    background-color: #630103;
+}
+
+.table-cadastro {
+    margin-top: 20px;
+    width: 75%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
+}
+
+.table-cadastro thead {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.table-cadastro th,
+.table-cadastro td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.table-cadastro td.status.aprovado {
+    color: green;
+    font-weight: bold;
+}
+
+.table-cadastro td.status.reprovado {
+    color: red;
+    font-weight: bold;
+}
+
+tr.highlighted {
+    background-color: #d0e7ff;
+    cursor: pointer;
+}
+
+.botao-fixo {
+    position: fixed;
+    bottom: 30px;
+    right: 95px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00528B;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.botao-fixo img {
+    width: 90px;
+    height: auto;
+}
+
+.botao-atualizar{
+    right: 325px;
+}
+
+.botao-deletar{
+    right: 210px;
+}
+
+.botao-relatorio{
+    right: 440px;
+}
+
+
+/* RESPONSIVIDADE: Seções e filtros */
+
+@media (max-width: 1024px) {
+    .initial-section,
+    .table-section,
+    .administradores-section {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .filter-section-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        max-width: 100%;
+    }
+
+    .filter-div {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .filter-div input {
+        width: 100%;
+    }
+
+    .button-filter-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .initial-section,
+    .table-section,
+    .administradores-section {
+        width: 100%;
+        height: auto;
+        padding: 15px 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .filter-section-container {
+        padding: 0 10px;
+    }
+
+    .filter-div input {
+        font-size: 16px;
+    }
+
+    .button-filter-container button,
+    .filter-div button {
+        font-size: 16px;
+        padding: 10px 14px;
+    }
+}

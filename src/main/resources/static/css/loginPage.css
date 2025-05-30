@@ -1,0 +1,130 @@
+/* CSS RESET */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* CSS RESET */
+
+:root {
+    font-family: 'Inter', sans-serif;
+    background-image: url("../img/loginPage/login-background.jpg");
+    background-size: cover;           
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#background{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right, rgba(0, 54, 92, 0.5), rgba(0, 134, 117, 0.5));
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 350px;
+    height: 50%;
+    max-height: 500px;
+    padding: 30px;
+    border-radius: 32px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25); 
+}
+
+#imepet-logo{
+    margin-top: -65px;
+    width: 225px;
+    height: auto;
+}
+
+.form-section img{
+    margin-top: 20px;
+    width: 125px;
+    height: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+}
+
+form input {
+    width: 300px;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-sizing: border-box;
+}
+
+form input:focus {
+    border-color: #008675;
+    box-shadow: 0 0 5px rgba(0, 134, 117, 0.5);
+}
+
+form button{
+    margin-top: 12px;
+    font-weight: bold;
+    width: 150px;
+    padding: 14px;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(to right, #00528B, #01828B, #00AA95);
+}
+
+form button:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}

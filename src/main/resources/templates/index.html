@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link th:href="@{/css/loginPage.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="background">
+    <section class="form-section">
+        <img id="imepet-logo" th:src="@{/img/IMEPET-logo.png}" alt="Logo clinica veterinária IMEPET">
+        <form action="#" method="POST">
+            <div class="input-group">
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+        <img class="imepac-logo" th:src="@{/img/logo-imepac-azul.png}" alt="Logo IMEPAC">
+    </section>
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let error = [[${error != null}]];
+    if (error) {
+        alert('[[${error}]]');
+        history.replaceState(null, '', location.pathname); // limpa os parâmetros
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

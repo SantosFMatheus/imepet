@@ -1,0 +1,41 @@
+:root{
+    font-family: 'Inter', sans-serif;
+}
+
+body{
+    background: linear-gradient(to right, #004470, #016B70, #008C7A);
+    color:white;
+}
+
+label span,
+p span{
+    font-weight: bold;
+    color: red;
+}
+
+.button-next {
+    background-color: #00528B;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    margin: 16px;
+}
+
+.button-next:hover {
+    background-color: #003f6b;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+    opacity: 0.8 !important;
+    cursor: not-allowed;
+}
+
+
+
+
