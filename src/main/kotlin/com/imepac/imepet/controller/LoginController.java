@@ -14,7 +14,7 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/login")
+    @GetMapping("/")
     public String showLoginPage() {
         return "index"; // index.html será a tela de login
     }
