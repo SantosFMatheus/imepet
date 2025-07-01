@@ -236,19 +236,110 @@ function abrirPopupEdicao(id) {
     );
 }
 
-function exportarTabela() {
-    const tabela = document.querySelector(".table-cadastro");
+// NOVA FUNÇÃO EXPORTAR TABELA PARA INCLUIR TODOS OS DADOS
+async function exportarTabela() {
+    try {
+        const response = await fetch('/tutores/todos-dados'); // Chama o novo endpoint
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar dados: ${response.statusText}`);
+        }
+        const tutoresCompletos = await response.json();
 
-    if (!tabela) {
-        console.warn("Tabela não encontrada!");
-        return;
+        if (tutoresCompletos.length === 0) {
+            alert("Não há dados de tutores para exportar.");
+            return;
+        }
+
+        // Preparar os dados para a planilha
+        const dadosPlanilha = [];
+
+        // Cabeçalhos das colunas
+        const cabecalhosTutor = [
+            'ID', 'Nome', 'Celular', 'CPF', 'RG', 'Data Nascimento', 'Naturalidade',
+            'Estado Civil', 'Nome Cônjuge', 'Tem Filhos', 'Qtde Filhos', 'CEP', 'Município',
+            'UF', 'Rua', 'Número', 'Bairro', 'Telefone', 'Tipo Residência',
+            'Situação Imóvel', 'Valor Aluguel Imóvel', 'Status'
+        ];
+        const cabecalhosSocioeconomicos = [
+            'Situação Moradia', 'Moradia Coletiva Esp.', 'Valor Aluguel Moradia',
+            'Outros Moradia Esp.', 'Local Trabalho Tutor', 'Valor Remuneração Tutor',
+            'Tem Outras Fontes Renda', 'Valor Outras Fontes Renda', 'Tem Conta Bancária',
+            'Nome Banco', 'Local Trabalho Pai', 'Local Trabalho Mãe',
+            'Local Trabalho Cônjuge', 'Local Trabalho Filhos', 'Renda Pai',
+            'Renda Mãe', 'Renda Cônjuge', 'Renda Familiar Total',
+            'Nº Pessoas Grupo Familiar', 'Programa Social', 'Outro Programa Social',
+            'Bens Familiares'
+        ];
+
+        dadosPlanilha.push([...cabecalhosTutor, ...cabecalhosSocioeconomicos]);
+
+        // Preencher as linhas com os dados
+        tutoresCompletos.forEach(tutorCompleto => {
+            const tutor = tutorCompleto.tutor;
+            const dadosSocioeconomicos = tutorCompleto.dadosSocioeconomicos;
+
+            const linha = [
+                tutor.id,
+                tutor.nome,
+                tutor.celular,
+                tutor.cpf,
+                tutor.rg,
+                formatarData(tutor.dataNascimento), // Reutiliza sua função de formatação
+                tutor.naturalidade,
+                tutor.estadoCivil,
+                tutor.nomeMarido,
+                tutor.temFilhos,
+                tutor.quantidadeFilhos,
+                tutor.cep,
+                tutor.municipio,
+                tutor.uf,
+                tutor.rua,
+                tutor.numero,
+                tutor.bairro,
+                tutor.telefone,
+                tutor.tipoResidencia,
+                tutor.situacaoImovel,
+                tutor.valorAluguel,
+                tutor.status,
+                // Dados Socioeconômicos (verificar se o objeto não é nulo antes de acessar)
+                dadosSocioeconomicos ? dadosSocioeconomicos.situacaoMoradia : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.moradiaColetivaEspecificacao : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.valorAluguel : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.outrosEspecificacao : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.localTrabalho : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.valorRemuneracao : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.temOutrasFontesDeRenda : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.valorOutrasFontesDeRenda : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.temContaBancaria : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.nomeBanco : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.localTrabalhoPai : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.localTrabalhoMae : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.localTrabalhoConjuge : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.localTrabalhoFilhos : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.rendaPai : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.rendaMae : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.rendaConjuge : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.valorTotalRemuneracao : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.numeroPessoasGrupoFamiliar : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.programaSocial : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.outroProgramaSocial : '',
+                dadosSocioeconomicos ? dadosSocioeconomicos.bensFamiliares : ''
+            ];
+            dadosPlanilha.push(linha);
+        });
+
+        // Criar a planilha e o arquivo Excel
+        const ws = XLSX.utils.aoa_to_sheet(dadosPlanilha);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Dados Completos Tutores");
+        XLSX.writeFile(wb, 'relatorio_completo_tutores.xlsx');
+
+        alert("Relatório completo gerado com sucesso!");
+
+    } catch (error) {
+        console.error('Erro ao gerar relatório completo:', error);
+        alert("Erro ao gerar relatório completo. Verifique o console para mais detalhes.");
     }
-
-    const workbook = XLSX.utils.table_to_book(tabela, {
-        sheet: "Tutores"
-    });
-
-    XLSX.writeFile(workbook, 'tabela_tutores.xlsx');
 }
 
 const botaoFiltrarAdmins = document.querySelector('#administradores-section .filter-div button');

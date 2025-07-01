@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.imepac.imepet.Dto.DadosTutorResumidoDTO;
-import com.imepac.imepet.model.TutorModel;
-
 @Controller
 @RequestMapping("/tutores")
 public class TutorController {
@@ -74,6 +71,15 @@ public class TutorController {
                 .collect(Collectors.toList());
     }
 
+    // NOVO ENDPOINT PARA EXPORTAR TODOS OS DADOS
+    @GetMapping("/todos-dados")
+    @ResponseBody
+    public List<TutorCompleto> listarTodosOsDadosDeTutores() {
+        return tutorService.listarTodos().stream()
+                .map(TutorCompleto::new) // Mapeia cada TutorModel para TutorCompleto
+                .collect(Collectors.toList());
+    }
+
     @GetMapping("/editar/{id}")
     public String editarTutor(@PathVariable Long id, Model model) {
         TutorModel tutor = tutorService.buscarPorId(id)
@@ -118,5 +124,4 @@ public class TutorController {
                     .body("Erro ao deletar tutor.");
         }
     }
-
 }

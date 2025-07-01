@@ -108,7 +108,8 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleOutroInput();
     }
 
- // Validação + Envio com fetch
+    // Validação + Envio com fetch
+    const form = document.querySelector('form'); // Garanta que 'form' seja declarado se não estiver
     if (form && buttonAlert) {
         buttonAlert.addEventListener('click', async function (e) {
             e.preventDefault();
@@ -146,25 +147,75 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 if (response.ok) {
-                    const novoTutor = await response.json();
+                    // A resposta do seu backend no popup-success.html não retorna JSON, então não tente parsear.
+                    // Apenas verifique se a resposta é OK.
 
                     if (window.opener && !window.opener.closed) {
-                        window.opener.carregarTutoresResumidos();
+                        window.opener.location.reload(); // Recarrega a página pai para atualizar a tabela
                     }
 
                     alert('Tutor cadastrado com sucesso!');
                     form.reset(); // limpa o formulário
+                    // Pode fechar o popup aqui, se o popup-success.html não fizer isso.
+                    window.close();
                 } else {
                     alert("Erro ao salvar tutor.");
                 }
             } catch (error) {
                 console.error('Erro ao enviar o formulário:', error);
+                alert("Erro de rede ao salvar tutor.");
             }
         });
     }
-});
 
-// Essas funções não precisam estar dentro do DOMContentLoaded
+    // --- AQUI VOCÊ DEVE ADICIONAR O NOVO CÓDIGO DO CEP ---
+    const cepInput = document.getElementById('cep');
+    const ruaInput = document.getElementById('rua');
+    const bairroInput = document.getElementById('bairro');
+    const municipioInput = document.getElementById('municipio');
+    const ufInput = document.getElementById('uf');
+
+    cepInput.addEventListener('blur', async function() {
+        const cep = this.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+
+        if (cep.length === 8) {
+            try {
+                const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                const data = await response.json();
+
+                if (!data.erro) {
+                    ruaInput.value = data.logradouro;
+                    bairroInput.value = data.bairro;
+                    municipioInput.value = data.localidade;
+                    ufInput.value = data.uf;
+                } else {
+                    // Limpa os campos se o CEP for inválido
+                    ruaInput.value = '';
+                    bairroInput.value = '';
+                    municipioInput.value = '';
+                    ufInput.value = '';
+                    alert('CEP não encontrado.');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar CEP:', error);
+                alert('Erro ao buscar CEP. Verifique sua conexão ou tente novamente.');
+            }
+        } else {
+            // Limpa os campos se o CEP for incompleto ou inválido
+            ruaInput.value = '';
+            bairroInput.value = '';
+            municipioInput.value = '';
+            ufInput.value = '';
+        }
+    });
+    // --- FIM DO NOVO CÓDIGO DO CEP ---
+
+}); // <-- Fechamento do DOMContentLoaded
+
+// As funções abaixo (carregarTutoresResumidos, formatarData)
+// podem permanecer fora do DOMContentLoaded se forem globais
+// ou dentro dele se forem usadas apenas internamente.
+// Pelo que vejo, elas são globais, então podem ficar aqui.
 function carregarTutoresResumidos() {
     fetch('/tutores/resumidos')
         .then(response => response.json())
@@ -195,4 +246,3 @@ function formatarData(dataISO) {
     const data = new Date(dataISO);
     return data.toLocaleDateString('pt-BR');
 }
-
