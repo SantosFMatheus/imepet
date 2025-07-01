@@ -1,9 +1,10 @@
 package com.finan.orcamento
 
+import com.imepac.imepet.ImepetApplication
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
+@SpringBootTest(classes = [ImepetApplication::class])
 class OrcamentoApplicationTests {
 
 	@Test
