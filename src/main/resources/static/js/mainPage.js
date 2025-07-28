@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
         }
 
-        // ⚠️ Verifica se o nome é "admin"
+        //  Verifica se o nome é "admin"
         const nome = linhaSelecionada.children[2]?.textContent.trim().toLowerCase();
         if (entidade === 'administrador' && nome === 'administrador do sistema') {
             alert("O administrador principal não pode ser excluído.");
